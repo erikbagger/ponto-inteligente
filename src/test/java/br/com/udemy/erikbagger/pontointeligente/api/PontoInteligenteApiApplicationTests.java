@@ -1,4 +1,4 @@
-package br.com.udemy.erikbagger.pontointeligente;
+package br.com.udemy.erikbagger.pontointeligente.api;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
