@@ -70,7 +70,7 @@ public class Funcionario implements Serializable {
 	@Column(name = "DATA_ATUALIZACAO", nullable = false)
 	private LocalDateTime dataAtualizacao;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Empresa empresa;
 
 	@OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -195,9 +195,9 @@ public class Funcionario implements Serializable {
 
 	public String toString() {
 		return String.format(
-				"[id: %s, nome: %s, email: %s, senha: %s, cpf: %s, valorHora: %s, qtdHorasDiarias: %s, qtdHorasAlmoco: %s, perfil: %s, dataCriacao: %s, dataAtualizacao: %s, empresa: %s, lancamentos: %s, ]",
+				"[id: %s, nome: %s, email: %s, senha: %s, cpf: %s, valorHora: %s, qtdHorasDiarias: %s, qtdHorasAlmoco: %s, perfil: %s, dataCriacao: %s, dataAtualizacao: %s, empresa: %s]",
 				this.id, this.email, this.senha, this.cpf, this.valorHora, this.qtdHorasDiarias, this.qtdHorasAlmoco,
-				this.perfil, this.dataCriacao, this.dataAtualizacao, this.email, this.lancamentos);
+				this.perfil, this.dataCriacao, this.dataAtualizacao, this.email, this.empresa);
 	}
 
 }
