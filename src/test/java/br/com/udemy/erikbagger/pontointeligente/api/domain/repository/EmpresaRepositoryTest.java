@@ -13,13 +13,12 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
 
-@Sql(scripts = "startup_empresa.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 public class EmpresaRepositoryTest extends PontoInteligenteApiApplicationTests {
 
-	private static final String CNPJ = "00000000000011";
-
 	@Autowired
-	private EmpresaRepository repository;
+	protected EmpresaRepository repository;
+	
+	private static final String CNPJ = "00000000000011";
 
 	@Test
 	public void findByCnpjTest() {

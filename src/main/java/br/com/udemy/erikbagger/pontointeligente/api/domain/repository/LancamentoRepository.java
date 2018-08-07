@@ -17,11 +17,11 @@ import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Lancamento;
 @Transactional(readOnly = true)
 @NamedQueries({
 	@NamedQuery(name = "LancamentoRepository.findByFuncionarioId"
-			, query="SELECT l FROM Lancament l WHERE l.funcionario_id = :funcionarioId")
+			, query="SELECT l FROM Lancamento l WHERE l.funcionario_id = :funcionarioId")
 })
 public interface LancamentoRepository extends JpaRepository <Lancamento, Long>{
 
-	public List<Funcionario> findByFuncionarioId(@Param ("funcionarioId") Long id);
+	public List<Lancamento> findByFuncionarioId(@Param ("funcionarioId") Long id);
 	
-	public Page<Funcionario> findByFuncionarioId(@Param ("funcionarioId") Long id, Pageable pageable);
+	public Page<Lancamento> findByFuncionarioId(@Param ("funcionarioId") Long id, Pageable pageable);
 }
