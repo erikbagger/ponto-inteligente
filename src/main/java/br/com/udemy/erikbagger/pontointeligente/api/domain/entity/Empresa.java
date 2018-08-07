@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -24,19 +25,21 @@ public class Empresa implements Serializable {
 	private static final long serialVersionUID = 8551144249006804173L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMPRESA_SEQ")
+	@SequenceGenerator(name = "EMPRESA_SEQ", sequenceName = "EMPRESA_SEQ", allocationSize = 1)
+	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "cnpj", nullable = false)
+	@Column(name = "CNPJ", nullable = false)
 	private String cnpj;
 
-	@Column(name = "razao_social", nullable = false)
+	@Column(name = "RAZAO_SOCIAL", nullable = false)
 	private String razaoSocial;
 
-	@Column(name = "data_criacao", nullable = false)
+	@Column(name = "DATA_CRIACAO", nullable = false)
 	private LocalDateTime dataCriacao;
 
-	@Column(name = "data_atualizacao", nullable = false)
+	@Column(name = "DATA_ATUALIZACAO", nullable = false)
 	private LocalDateTime dataAtualizacao;
 
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -105,7 +108,7 @@ public class Empresa implements Serializable {
 
 	public String toString() {
 		return String.format(
-				"[id: %s, razaoSocial: %s, cnpj: %s, dataCriacao: %s, dataAtualizacao: %s, funcionarios: %s]", this.id,
-				this.razaoSocial, this.cnpj, this.dataCriacao, this.dataAtualizacao, this.funcionarios);
+				"[id: %s, razaoSocial: %s, cnpj: %s, dataCriacao: %s, dataAtualizacao: %s]", this.id,
+				this.razaoSocial, this.cnpj, this.dataCriacao, this.dataAtualizacao);
 	}
 }

@@ -18,7 +18,7 @@ public class LancamentoRepositoryTest extends PontoInteligenteApiApplicationTest
 	@Autowired
 	private LancamentoRepository repository;
 	
-	private static final Long ID = 1l;
+	private static final Long ID = 10l;
 	
 	@Test
 	public void findByFuncionarioIdTest() {

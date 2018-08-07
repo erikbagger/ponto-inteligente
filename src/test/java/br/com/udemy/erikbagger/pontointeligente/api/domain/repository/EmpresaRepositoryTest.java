@@ -17,7 +17,7 @@ public class EmpresaRepositoryTest extends PontoInteligenteApiApplicationTests {
 
 	@Autowired
 	protected EmpresaRepository repository;
-	
+
 	private static final String CNPJ = "00000000000011";
 
 	@Test
@@ -25,8 +25,8 @@ public class EmpresaRepositoryTest extends PontoInteligenteApiApplicationTests {
 		Empresa empresa = this.repository.findByCnpj(CNPJ);
 
 		assertThat(empresa).isNotNull();
-		assertNotNull(empresa.getId());
-		assertTrue(empresa.getId() == 1l);
+		assertThat(empresa.getId()).isNotNull();
 		assertEquals(CNPJ, empresa.getCnpj());
 	}
+
 }

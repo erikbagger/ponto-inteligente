@@ -14,37 +14,40 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.enums.LancamentoEnum;
 
 @Entity
-@Table(name = "lancamento")
+@Table(name = "LANCAMENTO")
 public class Lancamento implements Serializable {
 
 	private static final long serialVersionUID = -3559253436239994094L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LANCAMENTO_SEQ")
+	@SequenceGenerator(name = "LANCAMENTO_SEQ", sequenceName = "LANCAMENTO_SEQ", allocationSize = 1)
+	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "data", nullable = false)
+	@Column(name = "DATA", nullable = false)
 	private LocalDateTime data;
 
-	@Column(name = "descricao", nullable = true)
+	@Column(name = "DESCRICAO", nullable = true)
 	private String descricao;
 
-	@Column(name = "localizacao", nullable = true)
+	@Column(name = "LOCALIZACAO", nullable = true)
 	private String localizacao;
 
 	@Column(name = "data_criacao", nullable = false)
 	private LocalDateTime dataCriacao;
 
-	@Column(name = "data_atualizacao", nullable = false)
+	@Column(name = "DATA_ATUALIZACAO", nullable = false)
 	private LocalDateTime dataAtualizacao;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_lancamento", nullable = false)
+	@Column(name = "TIPO_LANCAMENTO", nullable = false)
 	private LancamentoEnum tipoLancamento;
 
 	@ManyToOne(fetch = FetchType.LAZY)

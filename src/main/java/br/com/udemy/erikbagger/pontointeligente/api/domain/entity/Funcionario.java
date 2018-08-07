@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -31,39 +32,42 @@ public class Funcionario implements Serializable {
 	private static final long serialVersionUID = -1985130705246888293L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FUNCIONARIO_SEQ")
+	@SequenceGenerator(name = "FUNCIONARIO_SEQ", sequenceName = "FUNCIONARIO_SEQ", allocationSize = 1)
+	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "nome", nullable = false)
+	@Column(name = "NOME", nullable = false)
 	private String nome;
 
-	@Column(name = "email", nullable = false)
+	@Column(name = "EMAIL", nullable = false)
 	private String email;
 
-	@Column(name = "senha", nullable = false)
+	@Column(name = "SENHA", nullable = false)
 	private String senha;
 
-	@Column(name = "cpf", nullable = false)
+	@Column(name = "CPF", nullable = false)
 	private String cpf;
 
-	@Column(name = "valor_hora", nullable = false)
+	@Column(name = "VALOR_HORA", nullable = false)
 	private BigDecimal valorHora;
 
 	@Transient
-	@Column(name = "qtd_horas_diarias")
+	@Column(name = "QTD_HORAS_DIARIAS")
 	private Float qtdHorasDiarias;
 
 	@Transient
-	@Column(name = "qtd_horas_almoco")
+	@Column(name = "QTD_HORAS_ALMOCO")
 	private Float qtdHorasAlmoco;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "PERFIL")
 	private PerfilEnum perfil;
 
-	@Column(name = "data_criacao", nullable = false)
+	@Column(name = "DATA_CRIACAO", nullable = false)
 	private LocalDateTime dataCriacao;
 
-	@Column(name = "data_atualizacao", nullable = false)
+	@Column(name = "DATA_ATUALIZACAO", nullable = false)
 	private LocalDateTime dataAtualizacao;
 
 	@ManyToOne(fetch = FetchType.LAZY)
