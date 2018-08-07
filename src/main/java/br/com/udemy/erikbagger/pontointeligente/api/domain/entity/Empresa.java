@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "empresa")
-public class Empresa implements Serializable{
+public class Empresa implements Serializable {
 
 	private static final long serialVersionUID = 8551144249006804173L;
 
@@ -27,13 +27,13 @@ public class Empresa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "razao_social", nullable = false)
-	private String razaoSocial;
-
 	@Column(name = "cnpj", nullable = false)
 	private String cnpj;
 
-	@Column(name = "data_cricao", nullable = false)
+	@Column(name = "razao_social", nullable = false)
+	private String razaoSocial;
+
+	@Column(name = "data_criacao", nullable = false)
 	private LocalDateTime dataCriacao;
 
 	@Column(name = "data_atualizacao", nullable = false)
@@ -50,20 +50,20 @@ public class Empresa implements Serializable{
 		this.id = id;
 	}
 
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
-
 	public String getCnpj() {
 		return cnpj;
 	}
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
 	}
 
 	public LocalDateTime getDataCriacao() {
