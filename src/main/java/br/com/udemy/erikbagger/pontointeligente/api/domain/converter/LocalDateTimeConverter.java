@@ -1,4 +1,4 @@
-package br.com.udemy.erikbagger.pontointeligente.api.domain.converters;
+package br.com.udemy.erikbagger.pontointeligente.api.domain.converter;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
