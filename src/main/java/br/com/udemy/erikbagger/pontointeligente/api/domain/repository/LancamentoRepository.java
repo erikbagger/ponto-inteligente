@@ -1,6 +1,7 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -11,7 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Lancamento;
 
 @Transactional(readOnly = true)
@@ -21,7 +21,7 @@ import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Lancamento;
 })
 public interface LancamentoRepository extends JpaRepository <Lancamento, Long>{
 
-	public List<Lancamento> findByFuncionarioId(@Param ("funcionarioId") Long id);
+	public Optional<List<Lancamento>> findByFuncionarioId(@Param ("funcionarioId") Long id);
 	
-	public Page<Lancamento> findByFuncionarioId(@Param ("funcionarioId") Long id, Pageable pageable);
+	public Optional<Page<Lancamento>> findByFuncionarioId(@Param ("funcionarioId") Long id, Pageable pageable);
 }

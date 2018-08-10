@@ -20,13 +20,13 @@ public class EmpresaServiceImpl implements EmpresaService {
 	private EmpresaRepository repository;
 
 	@Override
-	public Optional<Empresa> findByCnpj(String cnpj) {
+	public Empresa findByCnpj(String cnpj) {
 		log.info("Recebendo um CNPJ para realizar a busca por Empresa: {}", cnpj);
 
-		Optional<Empresa> empresa = Optional.ofNullable(this.repository.findByCnpj(cnpj));
+		Optional<Empresa> empresa = this.repository.findByCnpj(cnpj);
 
 		log.info("Retornando um registro de Empresa: {}", empresa.get().toString());
-		return empresa;
+		return empresa.get();
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public void deleteByCnpj(String cnpj) {
 		log.info("Recebendo um CNPJ para exclusão de uma Empresa: {}");
 
-		Optional<Empresa> empresa = this.findByCnpj(cnpj);
+		Optional<Empresa> empresa = Optional.ofNullable(this.findByCnpj(cnpj));
 
 		Long id = empresa.get().getId();
 

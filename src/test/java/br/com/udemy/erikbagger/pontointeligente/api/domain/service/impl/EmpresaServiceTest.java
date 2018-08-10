@@ -1,4 +1,4 @@
-package br.com.udemy.erikbagger.pontointeligente.api.domain.service;
+package br.com.udemy.erikbagger.pontointeligente.api.domain.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.service.EmpresaService;
 
 public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 
@@ -19,11 +20,11 @@ public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 
 	@Test
 	public void findByCnpjTest() {
-		Optional<Empresa> empresa = service.findByCnpj(CNPJ);
+		Empresa empresa = service.findByCnpj(CNPJ);
 
 		assertThat(empresa).isNotNull();
-		assertThat(empresa.get().getId()).isNotNull();
-		assertThat(empresa.get().getCnpj()).isEqualTo(CNPJ);
+		assertThat(empresa.getId()).isNotNull();
+		assertThat(empresa.getCnpj()).isEqualTo(CNPJ);
 	}
 
 	@Test

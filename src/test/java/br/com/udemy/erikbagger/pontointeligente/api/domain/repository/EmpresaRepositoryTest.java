@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Optional;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
@@ -22,11 +24,11 @@ public class EmpresaRepositoryTest extends PontoInteligenteApiApplicationTests {
 
 	@Test
 	public void findByCnpjTest() {
-		Empresa empresa = this.repository.findByCnpj(CNPJ);
+		Optional<Empresa> empresa = this.repository.findByCnpj(CNPJ);
 
 		assertThat(empresa).isNotNull();
-		assertThat(empresa.getId()).isNotNull();
-		assertEquals(CNPJ, empresa.getCnpj());
+		assertThat(empresa.get().getId()).isNotNull();
+		assertEquals(CNPJ, empresa.get().getCnpj());
 	}
 
 }

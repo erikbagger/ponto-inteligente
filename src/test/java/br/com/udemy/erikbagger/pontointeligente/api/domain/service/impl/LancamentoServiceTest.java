@@ -1,4 +1,4 @@
-package br.com.udemy.erikbagger.pontointeligente.api.domain.repository;
+package br.com.udemy.erikbagger.pontointeligente.api.domain.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,28 +13,29 @@ import org.springframework.data.domain.Sort.Direction;
 
 import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Lancamento;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.repository.LancamentoRepository;
 
-public class LancamentoRepositoryTest extends PontoInteligenteApiApplicationTests {
+public class LancamentoServiceTest extends PontoInteligenteApiApplicationTests {
 
 	@Autowired
 	private LancamentoRepository repository;
 
 	private static final Long ID = 10l;
+	
+	private static final PageRequest PAGEABLE = new PageRequest(0, 10, Direction.ASC, "id");
 
 	@Test
-	public void findByFuncionarioIdTest() {
+	public void findByLancamentoIdTest() {
 		Optional<List<Lancamento>> lancamentos = this.repository.findByFuncionarioId(ID);
 
 		assertThat(lancamentos.get()).isNotEmpty();
 	}
 
 	@Test
-	public void findByFuncionarioIdTestPageable() {
-		PageRequest request = new PageRequest(0, 4, Direction.ASC, "id");
-		Optional<Page<Lancamento>> lancamentos = this.repository.findByFuncionarioId(ID, request);
+	public void findByLancamentoIdPageableTest() {
+		Optional<Page<Lancamento>> lancamentos = this.repository.findByFuncionarioId(ID, PAGEABLE);
 
-		assertThat(lancamentos.get()).isNotNull();
 		assertThat(lancamentos.get()).isNotEmpty();
-		assertThat(lancamentos.get()).hasSize(4);
 	}
+
 }

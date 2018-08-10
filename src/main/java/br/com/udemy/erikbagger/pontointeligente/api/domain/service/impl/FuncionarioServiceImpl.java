@@ -20,34 +20,34 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	private FuncionarioRepository repository;
 
 	@Override
-	public Optional<Funcionario> findByCpf(String cpf) {
+	public Funcionario findByCpf(String cpf) {
 		log.info("Recebendo um CPF para efetuar a busca por um Funcionario: {}", cpf);
 
-		Optional<Funcionario> funcionario = Optional.ofNullable(this.repository.findByCpf(cpf));
+		Optional<Funcionario> funcionario = this.repository.findByCpf(cpf);
 
 		log.info("Retornando um objeto Funcionario: {}", funcionario.get().toString());
-		return funcionario;
+		return funcionario.get();
 	}
 
 	@Override
-	public Optional<Funcionario> findByEmail(String email) {
+	public Funcionario findByEmail(String email) {
 		log.info("Recebendo um email para efetuar a busca por um Funcionario: {}", email);
 
-		Optional<Funcionario> funcionario = Optional.ofNullable(this.repository.findByEmail(email));
+		Optional<Funcionario> funcionario = this.repository.findByEmail(email);
 
 		log.info("Retornando um objeto Funcionario: {}", funcionario.get().toString());
-		return funcionario;
+		return funcionario.get();
 	}
 
 	@Override
-	public Optional<Funcionario> findByCpfOrEmail(String cpf, String email) {
+	public Funcionario findByCpfOrEmail(String cpf, String email) {
 		log.info("Recebendo um CPF ou um email para efetuar a busca por um Funcionario: [cpf = {}, email = {}]", cpf,
 				email);
 
-		Optional<Funcionario> funcionario = Optional.ofNullable(this.repository.findByCpfOrEmail(cpf, email));
+		Optional<Funcionario> funcionario = this.repository.findByCpfOrEmail(cpf, email);
 
 		log.info("Retornando um objeto Funcionario: {}", funcionario.get().toString());
-		return funcionario;
+		return funcionario.get();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	public void deleteByCpf(String cpf) {
 		log.info("Recebendo um CPF para remover um Funcionario: {}", cpf);
 
-		Optional<Funcionario> funcionario = Optional.ofNullable(this.repository.findByCpf(cpf));
+		Optional<Funcionario> funcionario = this.repository.findByCpf(cpf);
 
 		Long id = funcionario.get().getId();
 

@@ -17,72 +17,72 @@ import br.com.udemy.erikbagger.pontointeligente.api.domain.service.FuncionarioSe
 public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests {
 
 	private static final String CPF = "12345678000";
-	
+
 	private static final String EMAIL = "email@email.com";
-	
+
 	private static final String NOVO_EMAIL = "novo_email@email.com";
-	
+
 	@Autowired
 	private FuncionarioService service;
 
 	@Test
 	public void findByCpfTest() {
-		Optional<Funcionario> funcionario = this.service.findByCpf(CPF);
-		
+		Funcionario funcionario = this.service.findByCpf(CPF);
+
 		assertThat(funcionario).isNotNull();
-		assertThat(funcionario.get().getId()).isNotNull();
-		assertThat(funcionario.get().getId()).isEqualTo(10l);
-		assertThat(funcionario.get().getCpf()).isEqualTo(CPF);
+		assertThat(funcionario.getId()).isNotNull();
+		assertThat(funcionario.getId()).isEqualTo(10l);
+		assertThat(funcionario.getCpf()).isEqualTo(CPF);
 	}
 
 	@Test
 	public void findByEmail() {
-		Optional<Funcionario> funcionario = this.service.findByEmail(EMAIL);
-		
+		Funcionario funcionario = this.service.findByEmail(EMAIL);
+
 		assertThat(funcionario).isNotNull();
-		assertThat(funcionario.get().getId()).isNotNull();
-		assertThat(funcionario.get().getId()).isEqualTo(10l);
-		assertThat(funcionario.get().getEmail()).isEqualTo(EMAIL);
+		assertThat(funcionario.getId()).isNotNull();
+		assertThat(funcionario.getId()).isEqualTo(10l);
+		assertThat(funcionario.getEmail()).isEqualTo(EMAIL);
 	}
 
 	@Test
 	public void findByCpfOrEmail() {
-		Optional<Funcionario> byCpf = this.service.findByCpfOrEmail(CPF, null);
-		Optional<Funcionario> byEmail = this.service.findByCpfOrEmail(null, EMAIL);
-		
+		Funcionario byCpf = this.service.findByCpfOrEmail(CPF, null);
+		Funcionario byEmail = this.service.findByCpfOrEmail(null, EMAIL);
+
 		assertThat(byCpf).isNotNull();
 		assertThat(byEmail).isNotNull();
-		
-		assertThat(byCpf.get().getId()).isNotNull();
-		assertThat(byEmail.get().getId()).isNotNull();
-		
-		assertThat(byCpf.get().getCpf()).isEqualTo(CPF);
-		assertThat(byEmail.get().getEmail()).isEqualTo(EMAIL);
-		
-		assertThat(byEmail.get().getId()).isEqualTo(byCpf.get().getId());
+
+		assertThat(byCpf.getId()).isNotNull();
+		assertThat(byEmail.getId()).isNotNull();
+
+		assertThat(byCpf.getCpf()).isEqualTo(CPF);
+		assertThat(byEmail.getEmail()).isEqualTo(EMAIL);
+
+		assertThat(byEmail.getId()).isEqualTo(byCpf.getId());
 	}
 
 	@Test
 	public void persist() {
 		Funcionario funcionario = createFuncionario();
-		
+
 		funcionario = this.service.persist(funcionario);
-		
+
 		assertThat(funcionario).isNotNull();
 		assertThat(funcionario.getId()).isNotNull();
 	}
 
 	@Test
 	public void update() {
-		Funcionario funcionario = this.service.findByCpf(CPF).get();
-		
+		Funcionario funcionario = this.service.findByCpf(CPF);
+
 		String oldEmail = funcionario.getEmail();
 		Long id = funcionario.getId();
-		
+
 		funcionario.setEmail(NOVO_EMAIL);
-		
+
 		funcionario = this.service.update(funcionario);
-		
+
 		assertThat(funcionario).isNotNull();
 		assertThat(funcionario.getId()).isNotNull();
 		assertThat(funcionario.getId()).isEqualTo(id);
@@ -92,9 +92,9 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 
 	@Test
 	public void deleteByCpf() {
-		
+
 	}
-	
+
 	private Funcionario createFuncionario() {
 		Funcionario funcionario = new Funcionario();
 		funcionario.setCpf("11122233344");
