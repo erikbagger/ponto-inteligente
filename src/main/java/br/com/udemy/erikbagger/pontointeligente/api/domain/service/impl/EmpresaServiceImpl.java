@@ -1,5 +1,6 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -50,7 +51,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public void deleteByCnpj(String cnpj) {
+	public Long deleteByCnpj(String cnpj) {
 		log.info("Recebendo um CNPJ para exclusão de uma Empresa: {}");
 
 		Optional<Empresa> empresa = Optional.ofNullable(this.findByCnpj(cnpj));
@@ -60,6 +61,17 @@ public class EmpresaServiceImpl implements EmpresaService {
 		this.repository.delete(empresa.get());
 
 		log.info("Registro de Empresa excluido com o id: {} e CNPJ: {}", id, cnpj);
+		return id;
+	}
+
+	@Override
+	public List<Empresa> findAll() {
+		log.info("Efetuando a busca por uma lista de Empresa");
+
+		Optional<List<Empresa>> empresas = Optional.ofNullable(this.repository.findAll());
+
+		log.info("Retornando uma lista de Empresas");
+		return empresas.get();
 	}
 
 }

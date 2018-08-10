@@ -1,5 +1,7 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.service;
 
+import java.util.List;
+
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
 
 public interface EmpresaService {
@@ -10,5 +12,7 @@ public interface EmpresaService {
 	
 	Empresa update(Empresa empresa);
 	
-	void deleteByCnpj(String cnpj);
+	Long deleteByCnpj(String cnpj);
+	
+	List<Empresa> findAll();
 }

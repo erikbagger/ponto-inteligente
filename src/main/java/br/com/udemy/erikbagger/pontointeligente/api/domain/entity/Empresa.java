@@ -2,6 +2,7 @@ package br.com.udemy.erikbagger.pontointeligente.api.domain.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -43,7 +44,7 @@ public class Empresa implements Serializable {
 	private LocalDateTime dataAtualizacao;
 
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Collection<Funcionario> funcionarios;
+	private Collection<Funcionario> funcionarios = new ArrayList<>();
 
 	public Long getId() {
 		return id;
