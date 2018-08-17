@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.CadastroPJDto;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.enums.PerfilEnum;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.util.PasswordUtils;
 
 public class CadastroPJMapper {
 
@@ -23,6 +25,8 @@ public class CadastroPJMapper {
 		ModelMapper mapper = new ModelMapper();
 		Empresa empresa = mapper.map(dto, Empresa.class);
 		Funcionario funcionario = mapper.map(dto, Funcionario.class);
+		funcionario.setPerfil(PerfilEnum.ROLE_ADMIN);
+		funcionario.setSenha(new PasswordUtils().generatePassword(dto.getSenha()));
 
 		Map<String, Object> entities = new HashMap<>();
 		entities.put("empresa", empresa);

@@ -1,5 +1,4 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.util;
-/*package br.com.udemy.erikbagger.pontointeligente.api.domain.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,4 +16,3 @@ public class PasswordUtils {
 		return new BCryptPasswordEncoder().encode(password);
 	}
 }
-*/
