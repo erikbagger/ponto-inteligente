@@ -1,18 +1,21 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 
 public interface EmpresaService {
 
-	Empresa findByCnpj(String cnpj);
+	Optional<Empresa> findByCnpj(String cnpj) throws NotFoundException;
 	
-	Empresa persist(Empresa empresa);
+	Empresa persist(Empresa empresa) throws NotFoundException, BusinessException;
 	
-	Empresa update(Empresa empresa);
+	Empresa update(Empresa empresa) throws NotFoundException;
 	
-	Long deleteByCnpj(String cnpj);
+	void deleteByCnpj(String cnpj) throws NotFoundException;
 	
-	List<Empresa> findAll();
+	List<Empresa> findAll() throws NotFoundException;
 }

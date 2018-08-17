@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.repository.EmpresaRepository;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.EmpresaService;
 
@@ -17,61 +19,79 @@ public class EmpresaServiceImpl implements EmpresaService {
 
 	private Logger log = LoggerFactory.getLogger(EmpresaServiceImpl.class);
 
+	private final EmpresaRepository repository;
+
 	@Autowired
-	private EmpresaRepository repository;
+	public EmpresaServiceImpl(EmpresaRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
-	public Empresa findByCnpj(String cnpj) {
+	public Optional<Empresa> findByCnpj(String cnpj) throws NotFoundException {
 		log.info("Recebendo um CNPJ para realizar a busca por Empresa: {}", cnpj);
 
 		Optional<Empresa> empresa = this.repository.findByCnpj(cnpj);
 
-		log.info("Retornando um registro de Empresa: {}", empresa.get().toString());
-		return empresa.get();
-	}
-
-	@Override
-	public Empresa persist(Empresa empresa) {
-		log.info("Recebendo uma Empresa para persistir: {}", empresa.toString());
-
-		empresa = this.repository.save(empresa);
-
-		log.info("Retornando objeto persistindo: {}", empresa);
+		log.info("Retornando um registro de Empresa: {}", empresa);
 		return empresa;
 	}
 
 	@Override
-	public Empresa update(Empresa empresa) {
-		log.info("Recebendo uma Empresa para atualizar: {}", empresa.toString());
+	public Empresa persist(Empresa entity) throws NotFoundException, BusinessException {
+		log.info("Recebendo uma Empresa para persistir: {}", entity.toString());
 
-		empresa = this.repository.save(empresa);
+		Optional<Empresa> empresa = this.findByCnpj(entity.getCnpj());
 
-		log.info("Retornando objeto atualizado: {}", empresa);
-		return empresa;
+		if (empresa.isPresent()) {
+			log.error("Empresa já existente: {}", empresa);
+			throw new BusinessException("Erro ao salvar", "Empresa já cadastrada");
+		}
+
+		entity = this.repository.save(entity);
+
+		log.info("Retornando objeto persistindo: {}", entity);
+		return entity;
 	}
 
 	@Override
-	public Long deleteByCnpj(String cnpj) {
+	public Empresa update(Empresa entity) throws NotFoundException {
+		log.info("Recebendo uma Empresa para atualizar: {}", entity.toString());
+
+		Optional.ofNullable(this.repository.findOne(entity.getId()))
+				.orElseThrow(() -> new NotFoundException("Empresa não encontrada"));
+
+		entity = this.repository.save(entity);
+
+		log.info("Retornando objeto atualizado: {}", entity);
+		return entity;
+	}
+
+	@Override
+	public void deleteByCnpj(String cnpj) throws NotFoundException {
 		log.info("Recebendo um CNPJ para exclusão de uma Empresa: {}");
 
-		Optional<Empresa> empresa = Optional.ofNullable(this.findByCnpj(cnpj));
+		Empresa empresa = this.findByCnpj(cnpj).orElseThrow(() -> new NotFoundException("Empresa não encontrada"));
 
-		Long id = empresa.get().getId();
+		Long id = empresa.getId();
 
-		this.repository.delete(empresa.get());
+		this.repository.delete(empresa);
 
 		log.info("Registro de Empresa excluido com o id: {} e CNPJ: {}", id, cnpj);
-		return id;
 	}
 
 	@Override
-	public List<Empresa> findAll() {
+	public List<Empresa> findAll() throws NotFoundException {
 		log.info("Efetuando a busca por uma lista de Empresa");
 
-		Optional<List<Empresa>> empresas = Optional.ofNullable(this.repository.findAll());
+		Optional<List<Empresa>> entities = Optional.ofNullable(this.repository.findAll());
+
+		if (!entities.isPresent()) {
+			log.error("Nenhum registro de Empresas encontrado");
+			throw new NotFoundException("NAO ENCONTRADO", "Nenhum registro encontrado");
+		}
 
 		log.info("Retornando uma lista de Empresas");
-		return empresas.get();
+		return entities.get();
 	}
 
 }

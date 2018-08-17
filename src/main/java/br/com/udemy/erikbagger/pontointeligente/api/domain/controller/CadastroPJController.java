@@ -2,8 +2,11 @@ package br.com.udemy.erikbagger.pontointeligente.api.domain.controller;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,21 +14,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.EmpresaDto;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.CadastroPJDto;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.AbstractException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
 
+//Cadastra uma empresa e o seu administrador
 @RestController
-@RequestMapping("/empresa")
-public interface EmpresaController {
+@RequestMapping("/cadastro-pj")
+@CrossOrigin(origins = "*")
+public interface CadastroPJController {
 
-	@GetMapping
-	ResponseEntity<List<EmpresaDto>> listar() throws NotFoundException;
+	@PostMapping
+	ResponseEntity<CadastroPJDto> cadastrar(CadastroPJDto cadastroPJDto, BindingResult result) throws BusinessException, NotFoundException;
 
-	@GetMapping("{cnpj}")
-	ResponseEntity<EmpresaDto> buscarPorCnpj(String cnpj) throws NotFoundException;
-
-	@DeleteMapping("{cnpj}")
-	ResponseEntity<String> excluir(String cnpj) throws NotFoundException;
 }

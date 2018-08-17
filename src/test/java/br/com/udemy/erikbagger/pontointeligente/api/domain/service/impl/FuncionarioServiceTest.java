@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.enums.PerfilEnum;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.FuncionarioService;
 
 public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests {
@@ -27,7 +29,7 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 
 	@Test
 	public void findByCpfTest() {
-		Funcionario funcionario = this.service.findByCpf(CPF);
+		Funcionario funcionario = this.service.findByCpf(CPF).get();
 
 		assertThat(funcionario).isNotNull();
 		assertThat(funcionario.getId()).isNotNull();
@@ -37,7 +39,7 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 
 	@Test
 	public void findByEmail() {
-		Funcionario funcionario = this.service.findByEmail(EMAIL);
+		Funcionario funcionario = this.service.findByEmail(EMAIL).get();
 
 		assertThat(funcionario).isNotNull();
 		assertThat(funcionario.getId()).isNotNull();
@@ -47,8 +49,8 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 
 	@Test
 	public void findByCpfOrEmail() {
-		Funcionario byCpf = this.service.findByCpfOrEmail(CPF, null);
-		Funcionario byEmail = this.service.findByCpfOrEmail(null, EMAIL);
+		Funcionario byCpf = this.service.findByCpfOrEmail(CPF, null).get();
+		Funcionario byEmail = this.service.findByCpfOrEmail(null, EMAIL).get();
 
 		assertThat(byCpf).isNotNull();
 		assertThat(byEmail).isNotNull();
@@ -63,7 +65,7 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 	}
 
 	@Test
-	public void persist() {
+	public void persist() throws BusinessException {
 		Funcionario funcionario = createFuncionario();
 
 		funcionario = this.service.persist(funcionario);
@@ -73,8 +75,8 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 	}
 
 	@Test
-	public void update() {
-		Funcionario funcionario = this.service.findByCpf(CPF);
+	public void update() throws NotFoundException {
+		Funcionario funcionario = this.service.findByCpf(CPF).get();
 
 		String oldEmail = funcionario.getEmail();
 		Long id = funcionario.getId();

@@ -1,18 +1,22 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.service;
 
+import java.util.Optional;
+
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 
 public interface FuncionarioService {
 
-	Funcionario findByCpf(String cpf);
+	Optional<Funcionario> findByCpf(String cpf);
 
-	Funcionario findByEmail(String email);
+	Optional<Funcionario> findByEmail(String email);
 
-	Funcionario findByCpfOrEmail(String cpf, String email);
+	Optional<Funcionario> findByCpfOrEmail(String cpf, String email);
 
-	Funcionario persist(Funcionario funcionario);
+	Funcionario persist(Funcionario funcionario) throws BusinessException;
 
-	Funcionario update(Funcionario funcionario);
+	Funcionario update(Funcionario funcionario) throws NotFoundException;
 
-	void deleteByCpf(String cpf);
+	void deleteByCpf(String cpf) throws NotFoundException;
 }

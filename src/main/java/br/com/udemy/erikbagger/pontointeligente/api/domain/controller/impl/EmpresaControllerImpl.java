@@ -1,77 +1,64 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.controller.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.controller.EmpresaController;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.EmpresaDto;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.mapper.EmpresaMapper;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.EmpresaService;
 
 @Component
-public class EmpresaControllerImpl implements EmpresaController {
-
+public class EmpresaControllerImpl implements EmpresaController{
+	
 	private static final Logger log = LoggerFactory.getLogger(EmpresaControllerImpl.class);
-
+	
+	private final EmpresaService service;
+	
 	@Autowired
-	private EmpresaService service;
-
-	@Override
-	public ResponseEntity<Empresa> cadastrar(@RequestBody Empresa empresa, BindingResult result) {
-		log.info("Recebendo um objeto para efetuar o cadastro da Empresa: {}", empresa);
-
-		empresa = this.service.persist(empresa);
-
-		log.info("Empresa cadastrada: {}", empresa);
-		return ResponseEntity.status(HttpStatus.CREATED).body(empresa);
+	public EmpresaControllerImpl(EmpresaService service) {
+		this.service = service;
 	}
 
 	@Override
-	public ResponseEntity<Empresa> buscarPorCnpj(@PathVariable String cnpj) {
-		log.info("Recebendo um CNPJ para efetuar a busca: {}", cnpj);
-
-		Empresa empresa = this.service.findByCnpj(cnpj);
-
-		log.info("Retornando objeto Empresa: {}", empresa);
-		return ResponseEntity.ok(empresa);
-	}
-
-	@Override
-	public ResponseEntity<List<Empresa>> listar() {
+	public ResponseEntity<List<EmpresaDto>> listar() throws NotFoundException {
 		log.info("Recebendo uma requisição para listar todas as empresas");
 
 		List<Empresa> empresas = this.service.findAll();
+		List<EmpresaDto> dtos = empresas.stream().map(EmpresaMapper::convertToDto).collect(Collectors.toList());
 
-		log.info("Retornando lista de Empresa: {}", empresas);
-		return ResponseEntity.ok(empresas);
+		log.info("Retornando lista de Empresas: {}", dtos);
+		return ResponseEntity.ok(dtos);
 	}
 
 	@Override
-	public ResponseEntity<Empresa> atualizar(@RequestBody Empresa empresa) {
-		log.info("Recebendo um objeto Empresa para atualizar: {}", empresa.toString());
+	public ResponseEntity<EmpresaDto> buscarPorCnpj(@PathVariable String cnpj) throws NotFoundException {
+		log.info("Recebendo um CNPJ para efetuar a busca: {}", cnpj);
 
-		empresa = this.service.update(empresa);
+		Empresa empresa = this.service.findByCnpj(cnpj).orElseThrow(() -> new NotFoundException("Empresa não encontrada para o CNPJ: " + cnpj));
+		EmpresaDto dto = EmpresaMapper.convertToDto(empresa);
 
-		log.info("Retornando objeto Empresa: {}", empresa.toString());
-		return ResponseEntity.ok(empresa);
+		log.info("Registro de Empresa encontrado: {}", dto);
+		return ResponseEntity.ok(dto);
 	}
 
 	@Override
-	public ResponseEntity<String> excluir(@PathVariable String cnpj) {
-		log.info("Recebendo um CNPJ exclusão: {}", cnpj);
+	public ResponseEntity<String> excluir(String cnpj) throws NotFoundException {
+		log.info("Recebendo um CNPJ para efetuar a exclusão: {}", cnpj);
 
-		Long id = this.service.deleteByCnpj(cnpj);
+		this.service.deleteByCnpj(cnpj);
 
-		log.info("Recurso excluído com o id: {}", id);
-		return ResponseEntity.ok().body("Empresa excluída com sucesso");
+		log.info("Registro de Empresa excluído com sucesso para o CNPJ: {}", cnpj);
+		return ResponseEntity.ok("Registro excluído com o CNPJ: " +cnpj);
 	}
 
 }

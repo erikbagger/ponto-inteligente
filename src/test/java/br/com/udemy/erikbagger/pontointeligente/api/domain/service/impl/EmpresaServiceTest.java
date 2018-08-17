@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.EmpresaService;
 
 public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
@@ -19,8 +21,8 @@ public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 	private static final String CNPJ = "00000000000011";
 
 	@Test
-	public void findByCnpjTest() {
-		Empresa empresa = service.findByCnpj(CNPJ);
+	public void findByCnpjTest() throws NotFoundException {
+		Empresa empresa = service.findByCnpj(CNPJ).get();
 
 		assertThat(empresa).isNotNull();
 		assertThat(empresa.getId()).isNotNull();
@@ -28,7 +30,7 @@ public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 	}
 
 	@Test
-	public void persistTest() {
+	public void persistTest() throws NotFoundException, BusinessException {
 		Empresa empresa = createEmpresa();
 
 		empresa = this.service.persist(empresa);
