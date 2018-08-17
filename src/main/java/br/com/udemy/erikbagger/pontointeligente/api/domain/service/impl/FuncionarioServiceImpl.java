@@ -52,7 +52,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 		Optional<Funcionario> funcionario = this.repository.findByCpfOrEmail(cpf, email);
 
-		log.info("Retornando um objeto Funcionario: {}", funcionario.get().toString());
+		log.info("Retornando um objeto Funcionario: {}", funcionario);
 		return funcionario;
 	}
 
