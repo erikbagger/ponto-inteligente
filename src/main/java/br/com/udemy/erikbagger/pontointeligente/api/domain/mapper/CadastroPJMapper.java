@@ -26,7 +26,7 @@ public class CadastroPJMapper {
 		Empresa empresa = mapper.map(dto, Empresa.class);
 		Funcionario funcionario = mapper.map(dto, Funcionario.class);
 		funcionario.setPerfil(PerfilEnum.ROLE_ADMIN);
-		funcionario.setSenha(new PasswordUtils().generatePassword(dto.getSenha()));
+		funcionario.setSenha(PasswordUtils.generatePassword(dto.getSenha()));
 
 		Map<String, Object> entities = new HashMap<>();
 		entities.put("empresa", empresa);

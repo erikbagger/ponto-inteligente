@@ -3,6 +3,8 @@ package br.com.udemy.erikbagger.pontointeligente.api.domain.exception;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Errors {
 
@@ -17,5 +19,9 @@ public class Errors {
 			this.errorList = new ArrayList<>();
 		}
 		this.errorList.addAll(Arrays.asList(error));
+	}
+	
+	public List<String> getMessages() {
+		return this.errorList.stream().map(ObjectError::getMessage).collect(Collectors.toList());
 	}
 }

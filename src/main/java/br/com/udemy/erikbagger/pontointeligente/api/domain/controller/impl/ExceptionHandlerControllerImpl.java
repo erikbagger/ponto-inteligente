@@ -17,7 +17,7 @@ public class ExceptionHandlerControllerImpl implements ExceptionHandlerControlle
 
 	@Override
 	public ResponseEntity<Errors> businessExceptionHandler(BusinessException e) {
-		log.error("Erros relacionados a regra de negócio encontrados: {}", e.getErrors().getErrorList());
+		log.error("Erros relacionados a regra de negócio encontrados: {}", e.getErrors().getMessages());
 		Errors errors = e.getErrors();
 
 		return ResponseEntity.badRequest().body(errors);

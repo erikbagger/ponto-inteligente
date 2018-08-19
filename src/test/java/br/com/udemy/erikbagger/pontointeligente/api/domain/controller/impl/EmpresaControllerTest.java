@@ -1,7 +1,6 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.controller.impl;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,7 +21,8 @@ public class EmpresaControllerTest extends PontoInteligenteApiApplicationTests{
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").isNumber())
-				.andReturn().getResponse().getContentAsString();
+				.andExpect(jsonPath("$.cnpj").value(CNPJ));
+		
 	}
 	
 	@Test
@@ -30,7 +30,7 @@ public class EmpresaControllerTest extends PontoInteligenteApiApplicationTests{
 		this.mockMvc.perform(get(URI)
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andReturn().getResponse().getContentAsString();
+				.andReturn();
 		
 	}
 }

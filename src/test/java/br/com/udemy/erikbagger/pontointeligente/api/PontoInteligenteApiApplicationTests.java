@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 
 @SpringBootTest
@@ -23,6 +25,9 @@ public abstract class PontoInteligenteApiApplicationTests {
 
 	@Autowired
 	private WebApplicationContext ctx;
+	
+	@Autowired
+	protected ObjectMapper mapper;
 
 	protected MockMvc mockMvc;
 	
