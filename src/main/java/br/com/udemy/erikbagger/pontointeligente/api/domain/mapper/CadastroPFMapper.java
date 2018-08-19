@@ -1,6 +1,7 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.mapper;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 
@@ -15,18 +16,25 @@ public class CadastroPFMapper {
 		ModelMapper mapper = new ModelMapper();
 		CadastroPFDto dto = mapper.map(entity, CadastroPFDto.class);
 		dto.setCnpj(entity.getEmpresa().getCnpj());
+		dto.setValorHora(Optional.ofNullable(String.valueOf(entity.getValorHora())));
+		dto.setQtdHorasDiarias((Optional.ofNullable(String.valueOf(entity.getValorHora()))));
+		dto.setQtdHorasAlmoco((Optional.ofNullable(String.valueOf(entity.getValorHora()))));
 		return dto;
 	}
 	
 	public static Funcionario convertToEntity(CadastroPFDto dto) {
-		ModelMapper mapper = new ModelMapper();
-		Funcionario entity = mapper.map(dto, Funcionario.class);
-		entity.setPerfil(PerfilEnum.ROLE_USUARIO);
+		Funcionario entity = new Funcionario();
+		entity.setNome(dto.getNome());
+		entity.setEmail(dto.getEmail());
 		entity.setSenha(new PasswordUtils().generatePassword(dto.getSenha()));
+		entity.setCpf(dto.getCpf());
+		
 		dto.getValorHora().ifPresent(v -> entity.setValorHora(new BigDecimal(v)));
 		dto.getQtdHorasDiarias().ifPresent(v -> entity.setQtdHorasDiarias(Float.parseFloat(v)));
 		dto.getQtdHorasAlmoco().ifPresent(v -> entity.setQtdHorasAlmoco(Float.parseFloat(v)));
 		
+		entity.setPerfil(PerfilEnum.ROLE_USUARIO);
 		return entity;
 	}
+	
 }

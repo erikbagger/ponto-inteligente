@@ -64,7 +64,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		
 		if(funcionario.isPresent()) {
 			log.error("Encontrado um registro com o CPF ou email: {}", funcionario);
-			throw new BusinessException("Funcionario já cadastrado. Verifique o CPF e o email");
+			throw new BusinessException("ERRO", "Funcionario já cadastrado. Verifique o CPF e o email");
 		}
 		
 		entity = this.repository.save(entity);
