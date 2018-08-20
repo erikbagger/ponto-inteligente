@@ -193,11 +193,12 @@ public class Funcionario implements Serializable {
 		this.dataAtualizacao = dataAtual;
 	}
 
+	@Override
 	public String toString() {
-		return String.format(
-				"[id: %s, nome: %s, email: %s, senha: %s, cpf: %s, valorHora: %s, qtdHorasDiarias: %s, qtdHorasAlmoco: %s, perfil: %s, dataCriacao: %s, dataAtualizacao: %s, empresa: %s]",
-				this.id, this.email, this.senha, this.cpf, this.valorHora, this.qtdHorasDiarias, this.qtdHorasAlmoco,
-				this.perfil, this.dataCriacao, this.dataAtualizacao, this.email, this.empresa);
+		return "Funcionario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
+				+ ", valorHora=" + valorHora + ", qtdHorasDiarias=" + qtdHorasDiarias + ", qtdHorasAlmoco="
+				+ qtdHorasAlmoco + ", perfil=" + perfil + ", dataCriacao=" + dataCriacao + ", dataAtualizacao="
+				+ dataAtualizacao + ", empresa=" + empresa + "]";
 	}
 
 }

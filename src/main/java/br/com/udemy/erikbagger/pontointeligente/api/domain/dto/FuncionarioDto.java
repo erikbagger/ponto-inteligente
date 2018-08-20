@@ -5,13 +5,11 @@ import java.util.Optional;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-public class CadastroPFDto {
+public class FuncionarioDto {
 
 	private Long id;
 
@@ -28,14 +26,6 @@ public class CadastroPFDto {
 	@NotEmpty(message = "A senha não pode ser vazia")
 	@Length(min = 8, max = 16, message = "A senha deve conter entre 8 e 16 caracteres")
 	private String senha;
-
-	@NotEmpty(message = "O CPF não pode ser vazio")
-	@CPF(message = "Formato de CPF inválido")
-	private String cpf;
-
-	@NotEmpty(message = "O CNPJ não pode ser vazio")
-	@CNPJ(message = "Formato de CNPJ inválido")
-	private String cnpj;
 
 	private Optional<String> valorHora = Optional.empty();
 	private Optional<String> qtdHorasDiarias = Optional.empty();
@@ -73,22 +63,6 @@ public class CadastroPFDto {
 		this.senha = senha;
 	}
 
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
 	public Optional<String> getValorHora() {
 		return valorHora;
 	}
@@ -115,9 +89,8 @@ public class CadastroPFDto {
 
 	@Override
 	public String toString() {
-		return "CadastroPFDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
-				+ ", cnpj=" + cnpj + ", valorHora=" + valorHora + ", qtdHorasDiarias=" + qtdHorasDiarias
-				+ ", qtdHorasAlmoco=" + qtdHorasAlmoco + "]";
+		return "FuncionarioDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", valorHora="
+				+ valorHora + ", qtdHorasDiarias=" + qtdHorasDiarias + ", qtdHorasAlmoco=" + qtdHorasAlmoco + "]";
 	}
-
+	
 }

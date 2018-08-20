@@ -91,10 +91,10 @@ public class CadastroPJDto {
 		this.cnpj = cnpj;
 	}
 
+	@Override
 	public String toString() {
-		return String.format(
-				"CadastroPJDto: {id: %s, nome: %s, email: %s, senha: %s, cpf: %s, razaoSocial: %s, cnpj: %s}", this.id,
-				this.nome, this.email, this.senha, this.cpf, this.razaoSocial, this.cnpj);
+		return "CadastroPJDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
+				+ ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + "]";
 	}
 
 }

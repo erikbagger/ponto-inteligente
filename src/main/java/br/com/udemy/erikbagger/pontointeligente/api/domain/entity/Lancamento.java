@@ -130,10 +130,11 @@ public class Lancamento implements Serializable {
 		this.dataAtualizacao = dataAtual;
 	}
 
+	@Override
 	public String toString() {
-		return String.format(
-				"[id: %s, data: %s, descricao: %s, localizacao: %s, dataCriacao: %s, dataAtualizacao: %s, tipoLancamento: %s, funcionario: %s]",
-				this.id, this.data, this.descricao, this.localizacao, this.dataCriacao, this.dataAtualizacao,
-				this.tipoLancamento, this.funcionario);
+		return "Lancamento [id=" + id + ", data=" + data + ", descricao=" + descricao + ", localizacao=" + localizacao
+				+ ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + ", tipoLancamento="
+				+ tipoLancamento + "]";
 	}
+
 }

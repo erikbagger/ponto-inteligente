@@ -30,7 +30,9 @@ public class EmpresaDto {
 		this.razaoSocial = razaoSocial;
 	}
 
+	@Override
 	public String toString() {
-		return String.format("Empresa: {id: %s, cnpj: %s, razaoSocial: %s}", this.id, this.cnpj, this.razaoSocial);
+		return "EmpresaDto [id=" + id + ", cnpj=" + cnpj + ", razaoSocial=" + razaoSocial + "]";
 	}
+
 }

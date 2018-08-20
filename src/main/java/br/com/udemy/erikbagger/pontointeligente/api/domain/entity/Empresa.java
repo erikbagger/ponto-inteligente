@@ -107,9 +107,10 @@ public class Empresa implements Serializable {
 		this.dataAtualizacao = dataAtual;
 	}
 
+	@Override
 	public String toString() {
-		return String.format(
-				"[id: %s, razaoSocial: %s, cnpj: %s, dataCriacao: %s, dataAtualizacao: %s]", this.id,
-				this.razaoSocial, this.cnpj, this.dataCriacao, this.dataAtualizacao);
+		return "Empresa [id=" + id + ", cnpj=" + cnpj + ", razaoSocial=" + razaoSocial + ", dataCriacao=" + dataCriacao
+				+ ", dataAtualizacao=" + dataAtualizacao + "]";
 	}
+
 }
