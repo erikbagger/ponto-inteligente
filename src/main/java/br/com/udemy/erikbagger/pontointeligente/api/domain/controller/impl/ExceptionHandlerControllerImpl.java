@@ -34,7 +34,6 @@ public class ExceptionHandlerControllerImpl implements ExceptionHandlerControlle
 	@Override
 	public ResponseEntity<String> internalErrorExceptionHandler(RuntimeException e) {
 		log.error("Uma exceção não esperada aconteceu: {}", e.getMessage());
-		e.printStackTrace();
 		String message = "Internal Server Error - Please contact the system administrator";
 
 		return ResponseEntity.status(500).body(message);

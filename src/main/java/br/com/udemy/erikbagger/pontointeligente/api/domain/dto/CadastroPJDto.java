@@ -6,11 +6,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
-
-import br.com.udemy.erikbagger.pontointeligente.api.domain.util.PasswordUtils;
-
 public class CadastroPJDto {
 
 	private Long id;
@@ -24,7 +19,6 @@ public class CadastroPJDto {
 	@Email(message = "Formato de email inválido")
 	private String email;
 
-//	@JsonProperty(access = Access.WRITE_ONLY)
 	@NotEmpty(message = "A senha não pode ser vazia")
 	@Length(min = 8, max = 16, message = "A senha deve conter entre 8 e 16 caracteres")
 	private String senha;

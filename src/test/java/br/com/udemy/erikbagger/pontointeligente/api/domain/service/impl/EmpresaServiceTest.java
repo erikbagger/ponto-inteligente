@@ -2,8 +2,6 @@ package br.com.udemy.erikbagger.pontointeligente.api.domain.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Optional;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

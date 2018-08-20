@@ -2,11 +2,8 @@ package br.com.udemy.erikbagger.pontointeligente.api.domain.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Optional;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;

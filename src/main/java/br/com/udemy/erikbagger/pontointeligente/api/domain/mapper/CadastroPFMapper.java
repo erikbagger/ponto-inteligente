@@ -26,7 +26,7 @@ public class CadastroPFMapper {
 		Funcionario entity = new Funcionario();
 		entity.setNome(dto.getNome());
 		entity.setEmail(dto.getEmail());
-		entity.setSenha(new PasswordUtils().generatePassword(dto.getSenha()));
+		entity.setSenha(PasswordUtils.generatePassword(dto.getSenha()));
 		entity.setCpf(dto.getCpf());
 		
 		dto.getValorHora().ifPresent(v -> entity.setValorHora(new BigDecimal(v)));

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
@@ -21,7 +20,6 @@ public class EmpresaServiceImpl implements EmpresaService {
 
 	private final EmpresaRepository repository;
 
-	@Autowired
 	public EmpresaServiceImpl(EmpresaRepository repository) {
 		this.repository = repository;
 	}
@@ -83,15 +81,10 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public List<Empresa> findAll() throws NotFoundException {
 		log.info("Efetuando a busca por uma lista de Empresa");
 
-		Optional<List<Empresa>> entities = Optional.ofNullable(this.repository.findAll());
+		List<Empresa> entities = Optional.ofNullable(this.repository.findAll()).orElseThrow(() -> new NotFoundException("NAO ENCONTRADO", "Nenhum registro encontrado"));
 
-		if (!entities.isPresent()) {
-			log.error("Nenhum registro de Empresas encontrado");
-			throw new NotFoundException("NAO ENCONTRADO", "Nenhum registro encontrado");
-		}
-
-		log.info("Retornando uma lista de Empresas");
-		return entities.get();
+		log.info("Retornando uma lista de Empresas: {}", entities);
+		return entities;
 	}
 
 }
