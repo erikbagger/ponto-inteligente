@@ -16,7 +16,7 @@ public interface FuncionarioService {
 
 	Funcionario persist(Funcionario funcionario) throws BusinessException;
 
-	Funcionario update(Funcionario funcionario) throws NotFoundException;
+	Funcionario update(Funcionario funcionario) throws NotFoundException, BusinessException;
 
 	void deleteByCpf(String cpf) throws NotFoundException;
 }

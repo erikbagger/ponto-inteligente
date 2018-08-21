@@ -2,6 +2,7 @@ package br.com.udemy.erikbagger.pontointeligente.api.domain.service.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,7 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 	}
 
 	@Test
-	public void update() throws NotFoundException {
+	public void update() throws NotFoundException, BusinessException {
 		Funcionario funcionario = this.service.findByCpf(CPF).get();
 
 		String oldEmail = funcionario.getEmail();
@@ -90,8 +91,14 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 	}
 
 	@Test
-	public void deleteByCpf() {
-
+	public void deleteByCpf() throws NotFoundException {
+		Optional<Funcionario> funcionario = this.service.findByCpf(CPF);
+		
+		this.service.deleteByCpf(CPF);
+		
+		funcionario = this.service.findByCpf(CPF);
+		
+		assertThat(funcionario).isNull();
 	}
 
 	private Funcionario createFuncionario() {

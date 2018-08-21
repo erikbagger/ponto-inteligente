@@ -6,9 +6,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
-
 public class FuncionarioDto {
 
 	private Long id;
@@ -22,10 +19,7 @@ public class FuncionarioDto {
 	@Email(message = "Formato de email inválido")
 	private String email;
 
-	@JsonProperty(access = Access.WRITE_ONLY)
-	@NotEmpty(message = "A senha não pode ser vazia")
-	@Length(min = 8, max = 16, message = "A senha deve conter entre 8 e 16 caracteres")
-	private String senha;
+	private Optional<String> senha;
 
 	private Optional<String> valorHora = Optional.empty();
 	private Optional<String> qtdHorasDiarias = Optional.empty();
@@ -55,11 +49,11 @@ public class FuncionarioDto {
 		this.email = email;
 	}
 
-	public String getSenha() {
+	public Optional<String> getSenha() {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
+	public void setSenha(Optional<String> senha) {
 		this.senha = senha;
 	}
 

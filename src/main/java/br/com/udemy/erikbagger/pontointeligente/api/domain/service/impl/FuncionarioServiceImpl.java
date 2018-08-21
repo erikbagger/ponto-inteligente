@@ -29,7 +29,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 		Optional<Funcionario> funcionario = this.repository.findByCpf(cpf);
 
-		log.info("Retornando um objeto Funcionario: {}", funcionario.get().toString());
+		log.info("Retornando um objeto Funcionario: {}", funcionario);
 		return funcionario;
 	}
 
@@ -39,7 +39,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 		Optional<Funcionario> funcionario = this.repository.findByEmail(email);
 
-		log.info("Retornando um objeto Funcionario: {}", funcionario.get().toString());
+		log.info("Retornando um objeto Funcionario: {}", funcionario);
 		return funcionario;
 	}
 
@@ -72,10 +72,18 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	}
 
 	@Override
-	public Funcionario update(Funcionario entity) throws NotFoundException {
+	public Funcionario update(Funcionario entity) throws NotFoundException, BusinessException {
 		log.info("Recebendo objeto Funcionario para atualizar: {}", entity);
 		
-		this.findByCpfOrEmail(entity.getCpf(), entity.getEmail()).orElseThrow(() -> new NotFoundException("Nenhum registro encontrado"));
+		Funcionario funcionario = Optional.ofNullable(this.repository.findOne(entity.getId())).orElseThrow(() -> new NotFoundException("Erro ao atualizar. Registro não encontrado"));
+		
+		if(!funcionario.getEmail().equals(entity.getEmail())) {
+			Optional<Funcionario> email = this.findByEmail(entity.getEmail());
+			if(email.isPresent()) {
+				log.error("Encontrado um registro com o email");
+				throw new BusinessException("EMAIL JÁ EXISTENTE", "Já existe um registro com esse email!");
+			}
+		}
 		
 		entity = this.repository.save(entity);
 
@@ -94,5 +102,5 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		this.repository.delete(funcionario);
 		log.info("Objeto Funcionario removido com sucesso com o id: {}, e CPF: {}", id, cpf);
 	}
-
+	
 }
