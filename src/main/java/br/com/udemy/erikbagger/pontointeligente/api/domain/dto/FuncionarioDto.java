@@ -19,7 +19,7 @@ public class FuncionarioDto {
 	@Email(message = "Formato de email inválido")
 	private String email;
 
-	private Optional<String> senha;
+	private Optional<String> senha = Optional.empty();
 
 	private Optional<String> valorHora = Optional.empty();
 	private Optional<String> qtdHorasDiarias = Optional.empty();

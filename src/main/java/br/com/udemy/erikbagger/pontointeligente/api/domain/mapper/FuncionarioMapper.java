@@ -23,6 +23,7 @@ public class FuncionarioMapper {
 	
 	public static Funcionario convertToEntity(FuncionarioDto dto) {
 		Funcionario entity = new Funcionario();
+		entity.setId(dto.getId());
 		entity.setNome(dto.getNome());
 		entity.setEmail(dto.getEmail());
 		

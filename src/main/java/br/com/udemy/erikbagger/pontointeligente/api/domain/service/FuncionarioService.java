@@ -1,5 +1,6 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
@@ -8,6 +9,8 @@ import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundExc
 
 public interface FuncionarioService {
 
+	List<Funcionario> listar() throws NotFoundException;
+	
 	Optional<Funcionario> findByCpf(String cpf);
 
 	Optional<Funcionario> findByEmail(String email);

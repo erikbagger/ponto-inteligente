@@ -3,12 +3,16 @@ package br.com.udemy.erikbagger.pontointeligente.api.domain.controller.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.controller.FuncionarioController;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.FuncionarioDto;
@@ -30,7 +34,7 @@ public class FuncionarioControllerImpl implements FuncionarioController{
 	}
 
 	@Override
-	public ResponseEntity<FuncionarioDto> atualizar(FuncionarioDto funcionarioDto, BindingResult result) throws BusinessException, NotFoundException {
+	public ResponseEntity<FuncionarioDto> atualizar(@Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result) throws BusinessException, NotFoundException {
 		log.info("Recebendo um FuncionarioDto para atualizar: {}", funcionarioDto);
 		
 		if(result.hasErrors() ) {
@@ -49,8 +53,24 @@ public class FuncionarioControllerImpl implements FuncionarioController{
 	}
 
 	@Override
-	public ResponseEntity<List<FuncionarioDto>> listar() {
-		return null;
+	public ResponseEntity<List<FuncionarioDto>> listar() throws NotFoundException {
+		log.info("Recebendo uma requisição para listar os Funcionarios");
+		
+		List<Funcionario> funcionarios = this.service.listar();
+		List<FuncionarioDto> dtos = funcionarios.stream().map(FuncionarioMapper::convertToDto).collect(Collectors.toList());
+		
+		log.info("Retornando uma lista de FuncionarioDto: {}", dtos);
+		return ResponseEntity.ok().body(dtos);
+	}
+
+	@Override
+	public ResponseEntity<String> deleteByCpf(@PathVariable ("cpf") String cpf) throws NotFoundException {
+		log.info("Recebendo um CPF para efetuar a exclusão: {}", cpf);
+		
+		this.service.deleteByCpf(cpf);
+		
+		log.info("Registro excluído com sucesso para o CPF: {}", cpf);
+		return ResponseEntity.ok().body("Registro excluído com sucesso");
 	}
 	
 }

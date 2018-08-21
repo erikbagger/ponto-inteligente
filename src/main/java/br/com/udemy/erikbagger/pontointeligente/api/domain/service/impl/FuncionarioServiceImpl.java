@@ -1,5 +1,7 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.service.impl;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -21,6 +23,21 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	
 	public FuncionarioServiceImpl(FuncionarioRepository repository) {
 		this.repository = repository;
+	}
+	
+	@Override
+	public List<Funcionario> listar() throws NotFoundException {
+		log.info("Buscando uma lista de Funcionario");
+		
+		List<Funcionario> lista = this.repository.findAll();
+		
+		if(lista.isEmpty()) {
+			log.error("Nenhum registro encontrado");
+			throw new NotFoundException("Nenhum registro encontrado!");
+		}
+		
+		log.info("Retornando uma lista de Funcionarios: {}", lista);
+		return lista;
 	}
 
 	@Override
@@ -85,7 +102,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 			}
 		}
 		
-		entity = this.repository.save(entity);
+		updateAttributes(entity, funcionario);
+		funcionario = this.repository.save(funcionario);
 
 		log.info("Retornando um objeto Funcionario: {}", entity);
 		return entity;
@@ -101,6 +119,25 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 		this.repository.delete(funcionario);
 		log.info("Objeto Funcionario removido com sucesso com o id: {}, e CPF: {}", id, cpf);
+	}
+	
+	private void updateAttributes(Funcionario source, Funcionario target) {
+		String senha = source.getSenha();
+		BigDecimal valorHora = source.getValorHora();
+		Float qtdHorasDiarias = source.getQtdHorasDiarias();
+		Float qtdHorasAlmoco = source.getQtdHorasAlmoco();
+		
+		target.setNome(source.getNome());
+		target.setEmail(source.getEmail());
+		
+		if (null != senha) 
+			target.setSenha(senha);
+		if (null != valorHora)
+			target.setValorHora(valorHora);
+		if (null != qtdHorasDiarias)
+			target.setQtdHorasDiarias(qtdHorasDiarias);
+		if (null != qtdHorasAlmoco)
+			target.setQtdHorasAlmoco(qtdHorasAlmoco);
 	}
 	
 }
