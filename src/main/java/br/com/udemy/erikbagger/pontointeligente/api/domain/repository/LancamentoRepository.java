@@ -1,5 +1,6 @@
 package br.com.udemy.erikbagger.pontointeligente.api.domain.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,4 +25,6 @@ public interface LancamentoRepository extends JpaRepository <Lancamento, Long>{
 	public Optional<List<Lancamento>> findByFuncionarioId(@Param ("funcionarioId") Long id);
 	
 	public Optional<Page<Lancamento>> findByFuncionarioId(@Param ("funcionarioId") Long id, Pageable pageable);
+	
+	public Optional<List<Lancamento>> findByFuncionarioIdAndData(@Param ("funcionarioId") Long id, @Param ("data") LocalDate data);
 }

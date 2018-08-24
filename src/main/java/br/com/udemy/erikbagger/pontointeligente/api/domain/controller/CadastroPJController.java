@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.CadastroPJDto;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 
 //Cadastra uma empresa e o seu administrador
 @RestController
@@ -18,6 +18,6 @@ import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessExc
 public interface CadastroPJController {
 
 	@PostMapping
-	ResponseEntity<CadastroPJDto> cadastrar(CadastroPJDto cadastroPJDto, BindingResult result) throws BusinessException, NotFoundException;
+	ResponseEntity<CadastroPJDto> cadastrar(CadastroPJDto cadastroPJDto, BindingResult result) throws BadRequestException, NotFoundException;
 
 }

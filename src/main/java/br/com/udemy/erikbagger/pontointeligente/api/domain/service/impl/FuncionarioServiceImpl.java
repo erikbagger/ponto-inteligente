@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.repository.FuncionarioRepository;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.FuncionarioService;
@@ -23,6 +23,15 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	
 	public FuncionarioServiceImpl(FuncionarioRepository repository) {
 		this.repository = repository;
+	}
+	
+	public Optional<Funcionario> buscarPorId(Long id){
+		log.info("Recebendo um id para retornar um Funcionario: {}", id);
+		
+		Optional<Funcionario> funcionario = Optional.ofNullable(this.repository.findOne(id));
+		
+		log.info("Retornando um Funcionario: {}", funcionario);
+		return funcionario;
 	}
 	
 	@Override
@@ -72,14 +81,14 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	}
 
 	@Override
-	public Funcionario persist(Funcionario entity) throws BusinessException {
+	public Funcionario persist(Funcionario entity) throws BadRequestException {
 		log.info("Recebendo um Funcionario para persistir: {}", entity.toString());
 
 		Optional<Funcionario> funcionario = this.findByCpfOrEmail(entity.getCpf(), entity.getEmail());
 		
 		if(funcionario.isPresent()) {
 			log.error("Encontrado um registro com o CPF ou email: {}", funcionario);
-			throw new BusinessException("ERRO", "Funcionario já cadastrado. Verifique o CPF e o email");
+			throw new BadRequestException("ERRO", "Funcionario já cadastrado. Verifique o CPF e o email");
 		}
 		
 		entity = this.repository.save(entity);
@@ -89,7 +98,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	}
 
 	@Override
-	public Funcionario update(Funcionario entity) throws NotFoundException, BusinessException {
+	public Funcionario update(Funcionario entity) throws NotFoundException, BadRequestException {
 		log.info("Recebendo objeto Funcionario para atualizar: {}", entity);
 		
 		Funcionario funcionario = Optional.ofNullable(this.repository.findOne(entity.getId())).orElseThrow(() -> new NotFoundException("Erro ao atualizar. Registro não encontrado"));
@@ -98,7 +107,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 			Optional<Funcionario> email = this.findByEmail(entity.getEmail());
 			if(email.isPresent()) {
 				log.error("Encontrado um registro com o email");
-				throw new BusinessException("EMAIL JÁ EXISTENTE", "Já existe um registro com esse email!");
+				throw new BadRequestException("EMAIL JÁ EXISTENTE", "Já existe um registro com esse email!");
 			}
 		}
 		
@@ -113,7 +122,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	public void deleteByCpf(String cpf) throws NotFoundException {
 		log.info("Recebendo um CPF para remover um Funcionario: {}", cpf);
 
-		Funcionario funcionario = this.repository.findByCpf(cpf).orElseThrow(() -> new NotFoundException(""));
+		Funcionario funcionario = this.repository.findByCpf(cpf).orElseThrow(() -> new NotFoundException("Registro não encontrado"));
 
 		Long id = funcionario.getId();
 

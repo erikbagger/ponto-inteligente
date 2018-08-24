@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.CadastroPFDto;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 
 @RestController
@@ -17,5 +17,5 @@ import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundExc
 public interface CadastroPFController {
 
 	@PostMapping
-	public ResponseEntity<CadastroPFDto> cadastrar(CadastroPFDto cadastroPFDto, BindingResult result) throws BusinessException, NotFoundException;
+	public ResponseEntity<CadastroPFDto> cadastrar(CadastroPFDto cadastroPFDto, BindingResult result) throws BadRequestException, NotFoundException;
 }

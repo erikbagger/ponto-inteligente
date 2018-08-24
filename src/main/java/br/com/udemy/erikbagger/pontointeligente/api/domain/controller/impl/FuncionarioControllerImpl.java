@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.controller.FuncionarioController;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.FuncionarioDto;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.mapper.FuncionarioMapper;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.FuncionarioService;
@@ -34,13 +34,13 @@ public class FuncionarioControllerImpl implements FuncionarioController{
 	}
 
 	@Override
-	public ResponseEntity<FuncionarioDto> atualizar(@Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result) throws BusinessException, NotFoundException {
+	public ResponseEntity<FuncionarioDto> atualizar(@Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result) throws BadRequestException, NotFoundException {
 		log.info("Recebendo um FuncionarioDto para atualizar: {}", funcionarioDto);
 		
 		if(result.hasErrors() ) {
 			log.error("Erros de validação encontrados em FuncionarioDto: {}", funcionarioDto);
 			List<String> erros = result.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-			throw new BusinessException("ERROS DE VALIDAÇÃO", erros);
+			throw new BadRequestException("ERROS DE VALIDAÇÃO", erros);
 		}
 		
 		Funcionario funcionario = FuncionarioMapper.convertToEntity(funcionarioDto);

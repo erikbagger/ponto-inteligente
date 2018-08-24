@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.enums.PerfilEnum;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.FuncionarioService;
 
@@ -63,7 +63,7 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 	}
 
 	@Test
-	public void persist() throws BusinessException {
+	public void persist() throws BadRequestException {
 		Funcionario funcionario = createFuncionario();
 
 		funcionario = this.service.persist(funcionario);
@@ -73,7 +73,7 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 	}
 
 	@Test
-	public void update() throws NotFoundException, BusinessException {
+	public void update() throws NotFoundException, BadRequestException {
 		Funcionario funcionario = this.service.findByCpf(CPF).get();
 
 		String oldEmail = funcionario.getEmail();
@@ -92,11 +92,9 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 
 	@Test
 	public void deleteByCpf() throws NotFoundException {
-		Optional<Funcionario> funcionario = this.service.findByCpf(CPF);
-		
 		this.service.deleteByCpf(CPF);
 		
-		funcionario = this.service.findByCpf(CPF);
+		Optional<Funcionario> funcionario = this.service.findByCpf(CPF);
 		
 		assertThat(funcionario).isNull();
 	}

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.EmpresaService;
 
@@ -28,7 +28,7 @@ public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 	}
 
 	@Test
-	public void persistTest() throws NotFoundException, BusinessException {
+	public void persistTest() throws NotFoundException, BadRequestException {
 		Empresa empresa = createEmpresa();
 
 		empresa = this.service.persist(empresa);

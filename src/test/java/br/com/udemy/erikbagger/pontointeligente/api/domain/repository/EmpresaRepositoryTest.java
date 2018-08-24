@@ -25,5 +25,4 @@ public class EmpresaRepositoryTest extends PontoInteligenteApiApplicationTests {
 		assertThat(empresa.get().getId()).isNotNull();
 		assertEquals(CNPJ, empresa.get().getCnpj());
 	}
-
 }

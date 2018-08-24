@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.controller.ExceptionHandlerController;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.Errors;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 
@@ -16,7 +16,7 @@ public class ExceptionHandlerControllerImpl implements ExceptionHandlerControlle
 	private static final Logger log = LoggerFactory.getLogger(ExceptionHandlerController.class);
 
 	@Override
-	public ResponseEntity<Errors> businessExceptionHandler(BusinessException e) {
+	public ResponseEntity<Errors> businessExceptionHandler(BadRequestException e) {
 		log.error("Erros relacionados a regra de negócio encontrados: {}", e.getErrors().getMessages());
 		Errors errors = e.getErrors();
 

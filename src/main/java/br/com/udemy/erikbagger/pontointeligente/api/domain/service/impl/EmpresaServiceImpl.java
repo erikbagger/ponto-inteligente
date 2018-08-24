@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.repository.EmpresaRepository;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.EmpresaService;
@@ -35,14 +35,14 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public Empresa persist(Empresa entity) throws NotFoundException, BusinessException {
+	public Empresa persist(Empresa entity) throws NotFoundException, BadRequestException {
 		log.info("Recebendo uma Empresa para persistir: {}", entity.toString());
 
 		Optional<Empresa> empresa = this.findByCnpj(entity.getCnpj());
 
 		if (empresa.isPresent()) {
 			log.error("Empresa já existente: {}", empresa);
-			throw new BusinessException("Erro ao salvar", "Empresa já cadastrada");
+			throw new BadRequestException("Erro ao salvar", "Empresa já cadastrada");
 		}
 
 		entity = this.repository.save(entity);

@@ -16,7 +16,7 @@ import br.com.udemy.erikbagger.pontointeligente.api.domain.controller.CadastroPF
 import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.CadastroPFDto;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.mapper.CadastroPFMapper;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.EmpresaService;
@@ -38,13 +38,13 @@ public class CadastroPFControllerImpl implements CadastroPFController {
 
 	@Override
 	public ResponseEntity<CadastroPFDto> cadastrar(@Valid @RequestBody CadastroPFDto cadastroPFDto,
-			BindingResult result) throws BusinessException, NotFoundException {
+			BindingResult result) throws BadRequestException, NotFoundException {
 		log.info("Recebendo um CadastroPFDto para persistir: {}", cadastroPFDto);
 		
 		if(result.hasErrors()) {
 			log.error("Erros de validação encontrados no CadastroPFDto: {}", cadastroPFDto);
 			List<String> errors = result.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
-			throw new BusinessException("ERRO DE VALIDAÇÃO", errors);
+			throw new BadRequestException("ERRO DE VALIDAÇÃO", errors);
 		}
 		
 		String cnpj = cadastroPFDto.getCnpj();

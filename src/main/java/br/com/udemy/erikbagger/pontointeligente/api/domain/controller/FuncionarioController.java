@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.FuncionarioDto;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 
 @RestController
@@ -20,7 +20,7 @@ public interface FuncionarioController {
 
 
 	@PutMapping
-	public ResponseEntity<FuncionarioDto> atualizar(FuncionarioDto funcionarioDto, BindingResult result) throws BusinessException, NotFoundException;
+	public ResponseEntity<FuncionarioDto> atualizar(FuncionarioDto funcionarioDto, BindingResult result) throws BadRequestException, NotFoundException;
 	
 	@GetMapping
 	public ResponseEntity<List<FuncionarioDto>> listar() throws NotFoundException;

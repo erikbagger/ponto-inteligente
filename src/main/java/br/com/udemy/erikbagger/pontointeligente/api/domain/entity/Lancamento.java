@@ -40,7 +40,7 @@ public class Lancamento implements Serializable {
 	@Column(name = "LOCALIZACAO", nullable = true)
 	private String localizacao;
 
-	@Column(name = "data_criacao", nullable = false)
+	@Column(name = "DATA_CRIACAO", nullable = false)
 	private LocalDateTime dataCriacao;
 
 	@Column(name = "DATA_ATUALIZACAO", nullable = false)

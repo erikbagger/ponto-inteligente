@@ -18,7 +18,7 @@ import br.com.udemy.erikbagger.pontointeligente.api.domain.controller.CadastroPJ
 import br.com.udemy.erikbagger.pontointeligente.api.domain.dto.CadastroPJDto;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Empresa;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.entity.Funcionario;
-import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.mapper.CadastroPJMapper;
 import br.com.udemy.erikbagger.pontointeligente.api.domain.service.EmpresaService;
@@ -40,13 +40,13 @@ public class CadastroPJControllerImpl implements CadastroPJController {
 
 	@Override
 	public ResponseEntity<CadastroPJDto> cadastrar(@Valid @RequestBody CadastroPJDto cadastroPJDto,
-			BindingResult result) throws BusinessException, NotFoundException {
+			BindingResult result) throws BadRequestException, NotFoundException {
 		log.info("Recebendo um objeto para efetuar o cadastro da Empresa: {}", cadastroPJDto);
 
 		if (result.hasErrors()) {
 			log.error("Erros de validação encontrados no CadastroPJDto: {}", cadastroPJDto);
 			List<String> messages = result.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-			throw new BusinessException("ERRO DE VALIDAÇÃO", messages);
+			throw new BadRequestException("ERRO DE VALIDAÇÃO", messages);
 		}
 
 		Empresa empresa = (Empresa) CadastroPJMapper.convertToEntity(cadastroPJDto).get("empresa");
