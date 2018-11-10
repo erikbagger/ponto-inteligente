@@ -126,7 +126,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 		Long id = funcionario.getId();
 
-		this.repository.delete(funcionario);
+		this.repository.delete(id);
 		log.info("Objeto Funcionario removido com sucesso com o id: {}, e CPF: {}", id, cpf);
 	}
 	

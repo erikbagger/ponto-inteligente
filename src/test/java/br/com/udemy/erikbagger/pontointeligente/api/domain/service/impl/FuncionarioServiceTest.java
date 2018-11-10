@@ -96,7 +96,7 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 		
 		Optional<Funcionario> funcionario = this.service.findByCpf(CPF);
 		
-		assertThat(funcionario).isNull();
+		assertThat(!funcionario.isPresent());
 	}
 
 	private Funcionario createFuncionario() {
