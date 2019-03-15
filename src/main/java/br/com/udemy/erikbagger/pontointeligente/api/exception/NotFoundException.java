@@ -4,9 +4,9 @@ public class NotFoundException extends AbstractException {
 
 	private static final long serialVersionUID = -4780529715403655848L;
 	
-	private static final String NAME = "NÃO ENCONTRADO";
+	private static final String CODE = "NÃO ENCONTRADO";
 
-	public NotFoundException(String... messages) {
-		super(NAME, messages);
+	public NotFoundException(String message) {
+		super(CODE, message);
 	}
 }

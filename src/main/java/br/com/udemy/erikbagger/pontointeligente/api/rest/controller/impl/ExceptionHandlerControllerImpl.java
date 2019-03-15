@@ -1,5 +1,7 @@
 package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
 
+import br.com.udemy.erikbagger.pontointeligente.api.exception.ExceptionWrapper;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.InternalServerError;
 import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.ExceptionHandlerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,8 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.Errors;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Component
 public class ExceptionHandlerControllerImpl implements ExceptionHandlerController {
@@ -16,27 +21,24 @@ public class ExceptionHandlerControllerImpl implements ExceptionHandlerControlle
 	private static final Logger log = LoggerFactory.getLogger(ExceptionHandlerController.class);
 
 	@Override
-	public ResponseEntity<Errors> businessExceptionHandler(BadRequestException e) {
-		log.error("Erros relacionados a regra de negócio encontrados: {}", e.getErrors().getMessages());
-		Errors errors = e.getErrors();
+	public ResponseEntity<ExceptionWrapper> businessExceptionHandler(BadRequestException e) {
+		log.error("Erros relacionados a regra de negócio encontrados: {}", e.getMessage());
 
-		return ResponseEntity.badRequest().body(errors);
+		return new ResponseEntity<>(new ExceptionWrapper(e), BAD_REQUEST);
 	}
 
 	@Override
-	public ResponseEntity<Errors> notFoundExceptionHandler(NotFoundException e) {
-		log.error("Recurso não encontrado: {}", e.getErrors().getErrorList());
-		Errors errors = e.getErrors();
+	public ResponseEntity<ExceptionWrapper> notFoundExceptionHandler(NotFoundException e) {
+		log.error("Recurso não encontrado: {}", e.getMessage());
 
-		return ResponseEntity.status(404).body(errors);
+		return new ResponseEntity<>(new ExceptionWrapper(e), NOT_FOUND);
 	}
 
 	@Override
-	public ResponseEntity<String> internalErrorExceptionHandler(RuntimeException e) {
-		log.error("Uma exceção não esperada aconteceu: {}", e.getMessage());
-		String message = "Internal Server Error - Please contact the system administrator";
+	public ResponseEntity<ExceptionWrapper> internalServerErrorHandler(Exception e) {
+		log.error("Uma exception ocorreu: {}", e.getMessage());
 
-		return ResponseEntity.status(500).body(message);
+		return new ResponseEntity<>(new ExceptionWrapper(new InternalServerError()), INTERNAL_SERVER_ERROR);
 	}
 
 }
