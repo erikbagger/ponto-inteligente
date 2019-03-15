@@ -17,5 +17,5 @@ import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 public interface CadastroPFController {
 
 	@PostMapping
-	public ResponseEntity<CadastroPFDto> cadastrar(CadastroPFDto cadastroPFDto, BindingResult result) throws BadRequestException, NotFoundException;
+	public ResponseEntity<CadastroPFDto> cadastrar(CadastroPFDto cadastroPFDto) throws BadRequestException, NotFoundException;
 }

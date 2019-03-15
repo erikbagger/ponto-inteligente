@@ -37,15 +37,8 @@ public class CadastroPFControllerImpl implements CadastroPFController {
 	}
 
 	@Override
-	public ResponseEntity<CadastroPFDto> cadastrar(@Valid @RequestBody CadastroPFDto cadastroPFDto,
-			BindingResult result) throws BadRequestException, NotFoundException {
+	public ResponseEntity<CadastroPFDto> cadastrar(@Valid @RequestBody CadastroPFDto cadastroPFDto) throws BadRequestException, NotFoundException {
 		log.info("Recebendo um CadastroPFDto para persistir: {}", cadastroPFDto);
-		
-		if(result.hasErrors()) {
-			log.error("Erros de validação encontrados no CadastroPFDto: {}", cadastroPFDto);
-			List<String> errors = result.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
-			throw new BadRequestException("ERRO DE VALIDAÇÃO", errors);
-		}
 		
 		String cnpj = cadastroPFDto.getCnpj();
 		Empresa empresa = this.empresaService.findByCnpj(cnpj).orElseThrow(() -> new NotFoundException("Empresa não encontrada para o CNPJ: " +cnpj));

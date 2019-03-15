@@ -1,22 +1,27 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.exception.controller;
 
 import br.com.udemy.erikbagger.pontointeligente.api.exception.ExceptionWrapper;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.InternalServerError;
 import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.ExceptionHandlerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Component
-public class ExceptionHandlerControllerImpl implements ExceptionHandlerController {
+public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandler implements ExceptionHandlerController {
 
 	private static final Logger log = LoggerFactory.getLogger(ExceptionHandlerController.class);
 
@@ -39,6 +44,13 @@ public class ExceptionHandlerControllerImpl implements ExceptionHandlerControlle
 		log.error("Uma exception ocorreu: {}", e.getMessage());
 
 		return new ResponseEntity<>(new ExceptionWrapper(new InternalServerError()), INTERNAL_SERVER_ERROR);
+	}
+
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(
+			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+		log.error("Erros relacionados a requisicao foram encontrados: {}", ex.getBindingResult());
+
+		return new ResponseEntity<>(new ExceptionWrapper(ex), BAD_REQUEST);
 	}
 
 }
