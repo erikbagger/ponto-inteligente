@@ -39,15 +39,8 @@ public class CadastroPJControllerImpl implements CadastroPJController {
 	}
 
 	@Override
-	public ResponseEntity<CadastroPJDto> cadastrar(@Valid @RequestBody CadastroPJDto cadastroPJDto,
-			BindingResult result) throws BadRequestException, NotFoundException {
+	public ResponseEntity<CadastroPJDto> cadastrar(@Valid @RequestBody CadastroPJDto cadastroPJDto) throws BadRequestException, NotFoundException {
 		log.info("Recebendo um objeto para efetuar o cadastro da Empresa: {}", cadastroPJDto);
-
-		if (result.hasErrors()) {
-			log.error("Erros de validação encontrados no CadastroPJDto: {}", cadastroPJDto);
-			List<String> messages = result.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-			throw new BadRequestException("ERRO DE VALIDAÇÃO", messages);
-		}
 
 		Empresa empresa = (Empresa) CadastroPJMapper.convertToEntity(cadastroPJDto).get("empresa");
 		empresa = this.empresaService.persist(empresa);

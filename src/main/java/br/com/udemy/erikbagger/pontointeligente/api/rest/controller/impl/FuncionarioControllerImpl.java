@@ -37,12 +37,6 @@ public class FuncionarioControllerImpl implements FuncionarioController {
 	public ResponseEntity<FuncionarioDto> atualizar(@Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result) throws BadRequestException, NotFoundException {
 		log.info("Recebendo um FuncionarioDto para atualizar: {}", funcionarioDto);
 		
-		if(result.hasErrors() ) {
-			log.error("Erros de validação encontrados em FuncionarioDto: {}", funcionarioDto);
-			List<String> erros = result.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-			throw new BadRequestException("ERROS DE VALIDAÇÃO", erros);
-		}
-		
 		Funcionario funcionario = FuncionarioMapper.convertToEntity(funcionarioDto);
 		funcionario = this.service.update(funcionario);
 		

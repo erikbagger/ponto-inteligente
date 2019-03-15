@@ -8,6 +8,10 @@ public class BadRequestException extends AbstractException {
 
 	private static final long serialVersionUID = -1185686385573245696L;
 
+	public BadRequestException(String code, String message){
+		super(code, message);
+	}
+
 	public BadRequestException(String code, List<FieldError> errors) {
 		super(code, errors);
 	}

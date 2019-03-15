@@ -20,7 +20,7 @@ public interface FuncionarioController {
 
 
 	@PutMapping
-	public ResponseEntity<FuncionarioDto> atualizar(FuncionarioDto funcionarioDto, BindingResult result) throws BadRequestException, NotFoundException;
+	public ResponseEntity<FuncionarioDto> atualizar(FuncionarioDto funcionarioDto) throws BadRequestException, NotFoundException;
 	
 	@GetMapping
 	public ResponseEntity<List<FuncionarioDto>> listar() throws NotFoundException;

@@ -25,8 +25,8 @@ public interface LancamentoController {
 	ResponseEntity<String> excluir(Long id) throws NotFoundException;
 	
 	@PostMapping
-	ResponseEntity<LancamentoDto> cadastrar(LancamentoDto lancamentoDto, BindingResult result) throws BadRequestException;
+	ResponseEntity<LancamentoDto> cadastrar(LancamentoDto lancamentoDto) throws NotFoundException, BadRequestException;
 
 	@PutMapping
-	ResponseEntity<LancamentoDto> atualizar(LancamentoDto lancamentoDto, BindingResult result) throws BadRequestException;
+	ResponseEntity<LancamentoDto> atualizar(LancamentoDto lancamentoDto) throws NotFoundException, BadRequestException;
 }

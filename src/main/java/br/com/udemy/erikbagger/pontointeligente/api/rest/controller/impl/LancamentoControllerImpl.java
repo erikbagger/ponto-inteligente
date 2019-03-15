@@ -73,17 +73,11 @@ public class LancamentoControllerImpl implements LancamentoController {
 	}
 
 	@Override
-	public ResponseEntity<LancamentoDto> cadastrar(@Valid @RequestBody LancamentoDto lancamentoDto, BindingResult result)
-			throws BadRequestException {
+	public ResponseEntity<LancamentoDto> cadastrar(@Valid @RequestBody LancamentoDto lancamentoDto) throws NotFoundException, BadRequestException{
 		log.info("Recebendo um LancamentoDto para cadastrar: {}", lancamentoDto);
-
-		if(result.hasErrors()) {
-			log.error("Erros de validação encontrados no dto: {}", lancamentoDto);
-			List<String> erros = result.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-			throw new BadRequestException("Erro de validação", erros);
-		}
 		
-		Funcionario funcionario = this.funcionarioService.buscarPorId(lancamentoDto.getFuncionarioId()).orElseThrow(() -> new BadRequestException("Funcionario não encontrado!", ""));
+		Funcionario funcionario = this.funcionarioService.buscarPorId(lancamentoDto.getFuncionarioId()).orElseThrow(() ->
+				new NotFoundException("Funcionario não encontrado!" ));
 		Lancamento lancamento = LancamentoMapper.convertToEntity(lancamentoDto);
 		lancamento.setFuncionario(funcionario);
 		
@@ -95,17 +89,12 @@ public class LancamentoControllerImpl implements LancamentoController {
 	}
 	
 	@Override
-	public ResponseEntity<LancamentoDto> atualizar(@Valid @RequestBody LancamentoDto lancamentoDto, BindingResult result)
-			throws BadRequestException {
+	public ResponseEntity<LancamentoDto> atualizar(@Valid @RequestBody LancamentoDto lancamentoDto)
+			throws NotFoundException, BadRequestException {
 		log.info("Recebendo um LancamentoDto para atualizar: {}", lancamentoDto);
-
-		if(result.hasErrors()) {
-			log.error("Erros de validação encontrados no dto: {}", lancamentoDto);
-			List<String> erros = result.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList());
-			throw new BadRequestException("Erro de validação", erros);
-		}
 		
-		Funcionario funcionario = this.funcionarioService.buscarPorId(lancamentoDto.getFuncionarioId()).orElseThrow(() -> new BadRequestException("Funcionario não encontrado!" ));
+		Funcionario funcionario = this.funcionarioService.buscarPorId(lancamentoDto.getFuncionarioId()).orElseThrow(() ->
+				new NotFoundException("Funcionario não encontrado!" ));
 		Lancamento lancamento = LancamentoMapper.convertToEntity(lancamentoDto);
 		lancamento.setFuncionario(funcionario);
 		
