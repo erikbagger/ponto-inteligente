@@ -1,4 +1,4 @@
-package br.com.udemy.erikbagger.pontointeligente.api.exception;
+package br.com.udemy.erikbagger.pontointeligente.api.exception.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.validation.FieldError;

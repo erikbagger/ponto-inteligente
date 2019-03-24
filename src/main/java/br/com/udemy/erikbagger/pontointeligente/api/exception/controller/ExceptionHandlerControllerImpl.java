@@ -1,6 +1,7 @@
 package br.com.udemy.erikbagger.pontointeligente.api.exception.controller;
 
 import br.com.udemy.erikbagger.pontointeligente.api.exception.*;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.wrapper.ExceptionWrapper;
 import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.ExceptionHandlerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +14,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @Component
 public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandler implements ExceptionHandlerController {
@@ -23,10 +22,10 @@ public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandl
 	private static final Logger log = LoggerFactory.getLogger(ExceptionHandlerController.class);
 
 	@Override
-	public ResponseEntity<ExceptionWrapper> businessExceptionHandler(BadRequestException e) {
+	public ResponseEntity<ExceptionWrapper> businessExceptionHandler(BusinessException e) {
 		log.error("Erros relacionados a regra de negócio encontrados: {}", e.getMessage());
 
-		return new ResponseEntity<>(new ExceptionWrapper(e), BAD_REQUEST);
+		return new ResponseEntity<>(new ExceptionWrapper(e), UNPROCESSABLE_ENTITY);
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandl
 			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 		log.error("Erros relacionados a requisicao foram encontrados: {}", ex.getBindingResult());
 
-		return new ResponseEntity<>(new ExceptionWrapper(ex), BAD_REQUEST);
+		return new ResponseEntity<>(new ExceptionWrapper(new BadRequestException("", ex.getBindingResult().getFieldErrors())), BAD_REQUEST);
 	}
 
 }
