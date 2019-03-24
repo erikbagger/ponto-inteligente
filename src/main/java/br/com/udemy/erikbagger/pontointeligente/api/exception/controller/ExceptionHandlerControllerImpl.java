@@ -1,7 +1,6 @@
 package br.com.udemy.erikbagger.pontointeligente.api.exception.controller;
 
-import br.com.udemy.erikbagger.pontointeligente.api.exception.ExceptionWrapper;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.InternalServerError;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.*;
 import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.ExceptionHandlerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;

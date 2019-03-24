@@ -34,7 +34,7 @@ public class FuncionarioControllerImpl implements FuncionarioController {
 	}
 
 	@Override
-	public ResponseEntity<FuncionarioDto> atualizar(@Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result) throws BadRequestException, NotFoundException {
+	public ResponseEntity<FuncionarioDto> atualizar(@Valid @RequestBody FuncionarioDto funcionarioDto) throws BadRequestException, NotFoundException {
 		log.info("Recebendo um FuncionarioDto para atualizar: {}", funcionarioDto);
 		
 		Funcionario funcionario = FuncionarioMapper.convertToEntity(funcionarioDto);

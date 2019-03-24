@@ -81,7 +81,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public List<Empresa> findAll() throws NotFoundException {
 		log.info("Efetuando a busca por uma lista de Empresa");
 
-		List<Empresa> entities = Optional.ofNullable(this.repository.findAll()).orElseThrow(() -> new NotFoundException("NAO ENCONTRADO", "Nenhum registro encontrado"));
+		List<Empresa> entities = Optional.ofNullable(this.repository.findAll()).orElseThrow(() -> new NotFoundException("Nenhum registro encontrado"));
 
 		log.info("Retornando uma lista de Empresas: {}", entities);
 		return entities;
