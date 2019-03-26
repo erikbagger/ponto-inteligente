@@ -11,6 +11,8 @@ import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestExceptio
 import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.service.EmpresaService;
 
+import java.util.Optional;
+
 public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 
 	@Autowired
@@ -19,7 +21,7 @@ public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 	private static final String CNPJ = "00000000000011";
 
 	@Test
-	public void findByCnpjTest() throws NotFoundException {
+	public void findByCnpjTest() {
 		Empresa empresa = service.findByCnpj(CNPJ).get();
 
 		assertThat(empresa).isNotNull();
@@ -28,7 +30,15 @@ public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 	}
 
 	@Test
-	public void persistTest() throws NotFoundException, BadRequestException {
+	public void findByCnpjNotFoundTest() {
+		final String randomCnpj = "12345678910123";
+		Optional<Empresa> empresa = service.findByCnpj(randomCnpj);
+
+		assertThat(!empresa.isPresent());
+	}
+
+	@Test
+	public void persistTest() throws BadRequestException {
 		Empresa empresa = createEmpresa();
 
 		empresa = this.service.persist(empresa);
@@ -39,12 +49,32 @@ public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 		assertThat(empresa.getRazaoSocial()).isEqualTo("BANCO X");
 	}
 
-	@Test
-	public void updateTest() {
+	@Test(expected = BadRequestException.class)
+	public void persistEmpresaAlreadyExistsTest() throws BadRequestException {
+		Empresa empresa = createEmpresa();
+
+		empresa = this.service.persist(empresa);
+
+		assertThat(empresa).isNotNull();
+
+		empresa.setRazaoSocial("Outra razao social");
+		this.service.persist(empresa);
 	}
 
 	@Test
-	public void deleteByCnpjTest() {
+	public void deleteByCnpjTest() throws NotFoundException{
+		this.service.deleteByCnpj(CNPJ);
+
+		Optional<Empresa> empresa = this.service.findByCnpj(CNPJ);
+
+		assertThat(!empresa.isPresent());
+	}
+
+	@Test(expected = NotFoundException.class)
+	public void deleteByCnpjEmpresaDoesNotExistTest() throws NotFoundException{
+		final String randomCnpj = "12345678910123";
+
+		this.service.deleteByCnpj(randomCnpj);
 	}
 
 	private Empresa createEmpresa() {

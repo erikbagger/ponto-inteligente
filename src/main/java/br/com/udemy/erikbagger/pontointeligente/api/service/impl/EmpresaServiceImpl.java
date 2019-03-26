@@ -25,7 +25,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public Optional<Empresa> findByCnpj(String cnpj) throws NotFoundException {
+	public Optional<Empresa> findByCnpj(String cnpj) {
 		log.info("Recebendo um CNPJ para realizar a busca por Empresa: {}", cnpj);
 
 		Optional<Empresa> empresa = this.repository.findByCnpj(cnpj);
@@ -35,7 +35,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public Empresa persist(Empresa entity) throws NotFoundException, BadRequestException {
+	public Empresa persist(Empresa entity) throws BadRequestException {
 		log.info("Recebendo uma Empresa para persistir: {}", entity.toString());
 
 		Optional<Empresa> empresa = this.findByCnpj(entity.getCnpj());

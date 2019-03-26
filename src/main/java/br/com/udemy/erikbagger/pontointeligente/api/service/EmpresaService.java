@@ -9,9 +9,9 @@ import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 
 public interface EmpresaService {
 
-	Optional<Empresa> findByCnpj(String cnpj) throws NotFoundException;
+	Optional<Empresa> findByCnpj(String cnpj);
 	
-	Empresa persist(Empresa empresa) throws NotFoundException, BadRequestException;
+	Empresa persist(Empresa empresa) throws BadRequestException;
 	
 	void deleteByCnpj(String cnpj) throws NotFoundException;
 	
