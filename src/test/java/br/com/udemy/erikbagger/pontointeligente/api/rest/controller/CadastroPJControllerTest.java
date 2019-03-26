@@ -1,4 +1,4 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller;
 
 import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
 import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.CadastroPJDto;

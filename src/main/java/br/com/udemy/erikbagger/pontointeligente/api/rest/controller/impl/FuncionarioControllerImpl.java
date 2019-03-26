@@ -1,10 +1,10 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
 
 import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper.FuncionarioMapper;
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.FuncionarioController;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.FuncionarioController;
 import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.FuncionarioDto;
 import br.com.udemy.erikbagger.pontointeligente.api.service.FuncionarioService;
 import org.slf4j.Logger;

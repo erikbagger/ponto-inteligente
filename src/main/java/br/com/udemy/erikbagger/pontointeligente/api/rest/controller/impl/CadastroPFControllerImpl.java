@@ -1,4 +1,4 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
 
 
 import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
@@ -6,7 +6,7 @@ import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper.CadastroPFMapper;
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.CadastroPFController;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.CadastroPFController;
 import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.CadastroPFDto;
 import br.com.udemy.erikbagger.pontointeligente.api.service.EmpresaService;
 import br.com.udemy.erikbagger.pontointeligente.api.service.FuncionarioService;

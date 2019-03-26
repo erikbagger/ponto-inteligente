@@ -5,7 +5,7 @@ import br.com.udemy.erikbagger.pontointeligente.api.exception.BusinessException;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.InternalServerError;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.wrapper.ExceptionWrapper;
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.ExceptionHandlerController;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.ExceptionHandlerController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

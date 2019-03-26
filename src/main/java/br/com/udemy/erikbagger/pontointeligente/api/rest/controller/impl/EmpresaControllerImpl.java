@@ -1,9 +1,9 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
 
 import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper.EmpresaMapper;
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.EmpresaController;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.EmpresaController;
 import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.EmpresaDto;
 import br.com.udemy.erikbagger.pontointeligente.api.service.EmpresaService;
 import org.slf4j.Logger;
