@@ -29,7 +29,7 @@ public class LancamentoRepositoryTest extends PontoInteligenteApiApplicationTest
 	}
 
 	@Test
-	public void findByFuncionarioIdTestPageable() {
+	public void findByFuncionarioIdPageableTest() {
 		PageRequest request = new PageRequest(0, 4, Direction.ASC, "id");
 		Optional<Page<Lancamento>> lancamentos = this.repository.findByFuncionarioId(ID, request);
 
