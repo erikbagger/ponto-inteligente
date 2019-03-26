@@ -1,15 +1,14 @@
 package br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.modelmapper.ModelMapper;
-
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto.CadastroPJDto;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.enums.PerfilEnum;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.util.PasswordUtils;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.CadastroPJDto;
+import org.modelmapper.ModelMapper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CadastroPJMapper {
 

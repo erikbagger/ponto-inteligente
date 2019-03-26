@@ -1,15 +1,14 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.dto;
 
-import java.util.Optional;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import java.util.Optional;
 
 public class CadastroPFDto {
 

@@ -1,9 +1,8 @@
 package br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper;
 
-import org.modelmapper.ModelMapper;
-
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto.EmpresaDto;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.EmpresaDto;
+import org.modelmapper.ModelMapper;
 
 public class EmpresaMapper {
 

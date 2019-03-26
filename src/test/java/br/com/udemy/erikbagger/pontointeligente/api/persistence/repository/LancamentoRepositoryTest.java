@@ -1,18 +1,17 @@
 package br.com.udemy.erikbagger.pontointeligente.api.persistence.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-import java.util.Optional;
-
+import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Lancamento;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 
-import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Lancamento;
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LancamentoRepositoryTest extends PontoInteligenteApiApplicationTests {
 

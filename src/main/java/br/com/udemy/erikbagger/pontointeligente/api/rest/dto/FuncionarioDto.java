@@ -1,10 +1,10 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto;
-
-import java.util.Optional;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.dto;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import java.util.Optional;
 
 public class FuncionarioDto {
 

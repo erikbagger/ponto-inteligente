@@ -1,11 +1,10 @@
 package br.com.udemy.erikbagger.pontointeligente.api.persistence.repository;
 
-import java.util.Optional;
-
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {

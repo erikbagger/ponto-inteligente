@@ -1,9 +1,11 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.EmpresaController;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper.EmpresaMapper;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.EmpresaController;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.EmpresaDto;
+import br.com.udemy.erikbagger.pontointeligente.api.service.EmpresaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto.EmpresaDto;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper.EmpresaMapper;
-import br.com.udemy.erikbagger.pontointeligente.api.service.EmpresaService;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class EmpresaControllerImpl implements EmpresaController {

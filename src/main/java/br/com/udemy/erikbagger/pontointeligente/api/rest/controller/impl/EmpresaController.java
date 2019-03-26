@@ -1,15 +1,14 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
 
-import java.util.List;
-
+import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.EmpresaDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto.EmpresaDto;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/empresa")

@@ -1,8 +1,8 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.security.jwt.controller;
 
 import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
-import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.JwtAuthenticationDto;
-import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.TokenDto;
+import br.com.udemy.erikbagger.pontointeligente.api.security.jwt.dto.JwtAuthenticationDto;
+import br.com.udemy.erikbagger.pontointeligente.api.security.jwt.dto.TokenDto;
 import br.com.udemy.erikbagger.pontointeligente.api.security.jwt.util.JwtTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

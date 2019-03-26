@@ -1,17 +1,16 @@
 package br.com.udemy.erikbagger.pontointeligente.api.service.impl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
+import br.com.udemy.erikbagger.pontointeligente.api.service.EmpresaService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
-import br.com.udemy.erikbagger.pontointeligente.api.service.EmpresaService;
-
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 

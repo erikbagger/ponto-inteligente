@@ -1,4 +1,4 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.dto;
+package br.com.udemy.erikbagger.pontointeligente.api.security.jwt.dto;
 
 public class TokenDto {
 

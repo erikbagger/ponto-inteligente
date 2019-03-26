@@ -1,18 +1,14 @@
-package br.com.udemy.erikbagger.pontointeligente.api.persistence.controller.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
+
+import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.CadastroPJDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.Test;
+import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.io.UnsupportedEncodingException;
-
-import org.junit.Test;
-import org.springframework.http.MediaType;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto.CadastroPJDto;
 
 public class CadastroPJControllerTest extends PontoInteligenteApiApplicationTests{
 

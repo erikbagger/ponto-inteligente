@@ -1,18 +1,17 @@
 package br.com.udemy.erikbagger.pontointeligente.api.service.impl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Optional;
-
+import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.enums.PerfilEnum;
+import br.com.udemy.erikbagger.pontointeligente.api.service.FuncionarioService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.enums.PerfilEnum;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
-import br.com.udemy.erikbagger.pontointeligente.api.service.FuncionarioService;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests {
 

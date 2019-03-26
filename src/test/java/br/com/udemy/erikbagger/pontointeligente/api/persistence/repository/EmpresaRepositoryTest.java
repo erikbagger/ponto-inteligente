@@ -1,14 +1,14 @@
 package br.com.udemy.erikbagger.pontointeligente.api.persistence.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class EmpresaRepositoryTest extends PontoInteligenteApiApplicationTests {
 

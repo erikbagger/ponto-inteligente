@@ -1,4 +1,4 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.dto;
 
 public class EmpresaDto {
 

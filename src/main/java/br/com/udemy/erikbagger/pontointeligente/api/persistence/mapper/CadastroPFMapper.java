@@ -1,14 +1,13 @@
 package br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
-import org.modelmapper.ModelMapper;
-
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto.CadastroPFDto;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.enums.PerfilEnum;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.util.PasswordUtils;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.CadastroPFDto;
+import org.modelmapper.ModelMapper;
+
+import java.math.BigDecimal;
+import java.util.Optional;
 
 public class CadastroPFMapper {
 

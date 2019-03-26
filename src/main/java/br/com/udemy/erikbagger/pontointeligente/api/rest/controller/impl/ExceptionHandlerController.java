@@ -1,13 +1,12 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
 
+import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.BusinessException;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.wrapper.ExceptionWrapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 
 @ControllerAdvice
 public interface ExceptionHandlerController {

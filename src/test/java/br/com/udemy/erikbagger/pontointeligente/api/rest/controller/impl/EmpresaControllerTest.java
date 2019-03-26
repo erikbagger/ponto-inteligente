@@ -1,13 +1,12 @@
-package br.com.udemy.erikbagger.pontointeligente.api.persistence.controller.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
+
+import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
+import org.junit.Test;
+import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import org.junit.Test;
-import org.springframework.http.MediaType;
-
-import br.com.udemy.erikbagger.pontointeligente.api.PontoInteligenteApiApplicationTests;
 
 public class EmpresaControllerTest extends PontoInteligenteApiApplicationTests{
 

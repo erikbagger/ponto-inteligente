@@ -1,26 +1,22 @@
-package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl;
+package br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.CadastroPFController;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper.CadastroPFMapper;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.impl.CadastroPFController;
+import br.com.udemy.erikbagger.pontointeligente.api.rest.dto.CadastroPFDto;
+import br.com.udemy.erikbagger.pontointeligente.api.service.EmpresaService;
+import br.com.udemy.erikbagger.pontointeligente.api.service.FuncionarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.com.udemy.erikbagger.pontointeligente.api.rest.controller.dto.CadastroPFDto;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Funcionario;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
-import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.mapper.CadastroPFMapper;
-import br.com.udemy.erikbagger.pontointeligente.api.service.EmpresaService;
-import br.com.udemy.erikbagger.pontointeligente.api.service.FuncionarioService;
+import javax.validation.Valid;
 
 @Component
 public class CadastroPFControllerImpl implements CadastroPFController {

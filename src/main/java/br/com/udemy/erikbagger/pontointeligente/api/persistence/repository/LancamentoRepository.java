@@ -1,19 +1,16 @@
 package br.com.udemy.erikbagger.pontointeligente.api.persistence.repository;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-
+import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Lancamento;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Lancamento;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 @NamedQueries({
