@@ -25,7 +25,7 @@ public class CadastroPJControllerTest extends PontoInteligenteApiApplicationTest
 	private static final String SENHA = "12345678";
 	
 	@Test
-	public void cadastrarTest() throws UnsupportedEncodingException, Exception {
+	public void cadastrarTest() throws Exception {
 		this.mockMvc.perform(post(URI)
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON)
@@ -36,7 +36,7 @@ public class CadastroPJControllerTest extends PontoInteligenteApiApplicationTest
 				.andExpect(jsonPath("$.nome").value(NOME))
 				.andExpect(jsonPath("$.email").value(EMAIL))
 				.andExpect(jsonPath("$.cpf").value(CPF))
-				.andReturn().getResponse().getContentAsString();;
+				.andReturn().getResponse().getContentAsString();
 	}
 	
 	private String createRequest() throws JsonProcessingException {
