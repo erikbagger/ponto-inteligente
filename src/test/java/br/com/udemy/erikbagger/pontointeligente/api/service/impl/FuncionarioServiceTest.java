@@ -36,7 +36,15 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 	}
 
 	@Test
-	public void findByEmail() {
+	public void findByCpfNotFoundTest() {
+		final String randomCpf = "12345678011";
+		Optional<Funcionario> funcionario = this.service.findByCpf(randomCpf);
+
+		assertThat(!funcionario.isPresent());
+	}
+
+	@Test
+	public void findByEmailTest() {
 		Funcionario funcionario = this.service.findByEmail(EMAIL).get();
 
 		assertThat(funcionario).isNotNull();
@@ -46,7 +54,15 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 	}
 
 	@Test
-	public void findByCpfOrEmail() {
+	public void findByEmailNotFoundTest() {
+		final String randomEmail = "qualquer@email.com";
+		Optional<Funcionario> funcionario = this.service.findByEmail(randomEmail);
+
+		assertThat(!funcionario.isPresent());
+	}
+
+	@Test
+	public void findByCpfOrEmailTest() {
 		Funcionario byCpf = this.service.findByCpfOrEmail(CPF, null).get();
 		Funcionario byEmail = this.service.findByCpfOrEmail(null, EMAIL).get();
 
@@ -63,7 +79,16 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 	}
 
 	@Test
-	public void persist() throws BadRequestException {
+	public void findByCpfOrEmailBothNotFoundTest() {
+		final String randomCpf = "12345678011";
+		final String randomEmail = "qualquer@email.com";
+		Optional<Funcionario> funcionario = this.service.findByCpfOrEmail(randomCpf, randomEmail);
+
+		assertThat(!funcionario.isPresent());
+	}
+
+	@Test
+	public void persistTest() throws BadRequestException {
 		Funcionario funcionario = createFuncionario();
 
 		funcionario = this.service.persist(funcionario);
@@ -72,8 +97,19 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 		assertThat(funcionario.getId()).isNotNull();
 	}
 
+	@Test(expected = BadRequestException.class)
+	public void persistFuncionarioAlreadyExistsTest() throws BadRequestException {
+		Funcionario funcionario = createFuncionario();
+
+		funcionario = this.service.persist(funcionario);
+
+		funcionario = createFuncionario();
+
+		this.service.persist(funcionario);
+	}
+
 	@Test
-	public void update() throws NotFoundException, BadRequestException {
+	public void updateTest() throws NotFoundException, BadRequestException {
 		Funcionario funcionario = this.service.findByCpf(CPF).get();
 
 		String oldEmail = funcionario.getEmail();
@@ -90,6 +126,25 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 		assertThat(funcionario.getEmail()).isEqualTo(NOVO_EMAIL);
 	}
 
+	@Test(expected = BadRequestException.class)
+	public void updateEntityWithIdNullTest() throws NotFoundException, BadRequestException {
+		final String randomCpf = "12345678011";
+
+		Funcionario funcionario = createFuncionario();
+		funcionario.setCpf(randomCpf);
+
+		this.service.update(funcionario);
+	}
+
+	@Test(expected = BadRequestException.class)
+	public void updateEmailAlreadyExistsTest() throws NotFoundException, BadRequestException {
+		Funcionario funcionario = this.service.findByCpf(CPF).get();
+
+		funcionario.setEmail("outro@email.com");
+
+		this.service.update(funcionario);
+	}
+
 	@Test
 	public void deleteByCpf() throws NotFoundException {
 		this.service.deleteByCpf(CPF);
@@ -97,6 +152,14 @@ public class FuncionarioServiceTest extends PontoInteligenteApiApplicationTests 
 		Optional<Funcionario> funcionario = this.service.findByCpf(CPF);
 		
 		assertThat(!funcionario.isPresent());
+	}
+
+	@Test(expected = NotFoundException.class)
+	public void deleteByCpfNotFound() throws NotFoundException {
+		final String randomCpf = "12345678011";
+		this.service.deleteByCpf(randomCpf);
+
+		this.service.findByCpf(CPF);
 	}
 
 	private Funcionario createFuncionario() {

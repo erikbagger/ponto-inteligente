@@ -100,6 +100,11 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Override
 	public Funcionario update(Funcionario entity) throws NotFoundException, BadRequestException {
 		log.info("Recebendo objeto Funcionario para atualizar: {}", entity);
+
+		if(entity.getId() == null){
+			log.error("Id nulo. Impossível atualizar Funcionario= {}", entity);
+			throw new BadRequestException("id.not.null", "Entidade com Id nulo");
+		}
 		
 		Funcionario funcionario = Optional.ofNullable(this.repository.findOne(entity.getId())).orElseThrow(() -> new NotFoundException("Erro ao atualizar. Registro não encontrado"));
 		
