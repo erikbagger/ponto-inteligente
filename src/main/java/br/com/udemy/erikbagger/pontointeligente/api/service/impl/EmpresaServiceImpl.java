@@ -52,19 +52,6 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public Empresa update(Empresa entity) throws NotFoundException {
-		log.info("Recebendo uma Empresa para atualizar: {}", entity.toString());
-
-		Optional.ofNullable(this.repository.findOne(entity.getId()))
-				.orElseThrow(() -> new NotFoundException("Empresa não encontrada"));
-
-		entity = this.repository.save(entity);
-
-		log.info("Retornando objeto atualizado: {}", entity);
-		return entity;
-	}
-
-	@Override
 	public void deleteByCnpj(String cnpj) throws NotFoundException {
 		log.info("Recebendo um CNPJ para exclusão de uma Empresa: {}");
 

@@ -12,8 +12,6 @@ import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 public interface LancamentoService {
 	
 	public Lancamento cadastrar(Lancamento lancamento);
-	
-	public List<Lancamento> findByFuncionarioId(Long id);
 
 	public Page<Lancamento> findByFuncionarioId(Long id, Pageable pageable) throws NotFoundException;
 	

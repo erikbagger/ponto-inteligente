@@ -1,6 +1,5 @@
 package br.com.udemy.erikbagger.pontointeligente.api.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -27,17 +26,6 @@ public class LancamentoServiceImpl implements LancamentoService {
 	public Lancamento cadastrar(final Lancamento lancamento) {
 		log.info("Recebendo um Lancamento para persistir: {}", lancamento);
 
-//		Optional<List<Lancamento>> lancamentos = this.repository.findByFuncionarioIdAndData(lancamento.getId(),
-//				lancamento.getData().toLocalDate());
-//		Supplier<Stream<Lancamento>> supplier = () -> lancamentos.isPresent() ? lancamentos.get().stream()
-//				: Stream.empty();
-//
-//		Optional<Boolean> found = Optional.ofNullable(
-//				Boolean.valueOf(supplier.get().anyMatch(l -> l.getTipoLancamento() == lancamento.getTipoLancamento())));
-//
-//		if(found.isPresent()) {
-//			
-//		}
 		this.repository.save(lancamento);
 
 		log.info("Retornando o Lancamento persistido: {}", lancamento);
@@ -51,16 +39,6 @@ public class LancamentoServiceImpl implements LancamentoService {
 
 		log.info("Retornando Lancamento: {}", lancamento);
 		return lancamento;
-	}
-
-	@Override
-	public List<Lancamento> findByFuncionarioId(Long id) {
-		log.info("Recebendo um id de Funcionario para buscar Lancamentos: {}", id);
-
-		Optional<List<Lancamento>> lancamentos = this.repository.findByFuncionarioId(id);
-
-		log.info("Retornando uma lista de Lancamentos: {}", lancamentos.toString());
-		return lancamentos.get();
 	}
 
 	@Override

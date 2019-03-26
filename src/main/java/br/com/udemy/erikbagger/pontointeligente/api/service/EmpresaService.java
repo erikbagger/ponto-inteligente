@@ -13,8 +13,6 @@ public interface EmpresaService {
 	
 	Empresa persist(Empresa empresa) throws NotFoundException, BadRequestException;
 	
-	Empresa update(Empresa empresa) throws NotFoundException;
-	
 	void deleteByCnpj(String cnpj) throws NotFoundException;
 	
 	List<Empresa> findAll() throws NotFoundException;
