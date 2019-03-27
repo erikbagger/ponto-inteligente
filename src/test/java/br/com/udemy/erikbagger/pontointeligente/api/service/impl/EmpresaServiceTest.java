@@ -17,7 +17,7 @@ public class EmpresaServiceTest extends PontoInteligenteApiApplicationTests {
 	@Autowired
 	protected EmpresaService service;
 
-	private static final String CNPJ = "00000000000011"
+	private static final String CNPJ = "00000000000011";
 
 	@Test
 	public void findByCnpjTest() {
