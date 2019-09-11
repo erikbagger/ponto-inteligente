@@ -1,4 +1,4 @@
-FROM springio/gs-spring-boot-docker
+FROM openjdk:8
 MAINTAINER lordbagger
 COPY ./target/ponto-inteligente.jar /home/ponto-inteligente-api/
 WORKDIR /home/ponto-inteligente-api/

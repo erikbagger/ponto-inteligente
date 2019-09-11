@@ -23,7 +23,7 @@ public class CadastroPFDto {
 	@Email(message = "Formato de email inválido")
 	private String email;
 
-	@JsonProperty(access = Access.WRITE_ONLY)
+	@JsonProperty
 	@NotEmpty(message = "A senha não pode ser vazia")
 	@Length(min = 8, max = 16, message = "A senha deve conter entre 8 e 16 caracteres")
 	private String senha;

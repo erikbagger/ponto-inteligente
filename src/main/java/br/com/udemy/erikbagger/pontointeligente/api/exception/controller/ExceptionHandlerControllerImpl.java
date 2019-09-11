@@ -32,7 +32,7 @@ public class ExceptionHandlerControllerImpl extends ResponseEntityExceptionHandl
 
 	@Override
 	public ResponseEntity<ExceptionWrapper> notFoundExceptionHandler(NotFoundException e) {
-		log.error("Recurso não encontrado: {}", e.getMessage());
+		log.error("Recurso nao encontrado: {}", e.getMessage());
 
 		return new ResponseEntity<>(new ExceptionWrapper(e), NOT_FOUND);
 	}

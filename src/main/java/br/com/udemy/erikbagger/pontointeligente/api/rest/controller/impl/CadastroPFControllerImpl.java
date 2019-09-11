@@ -37,7 +37,7 @@ public class CadastroPFControllerImpl implements CadastroPFController {
 		log.info("Recebendo um CadastroPFDto para persistir: {}", cadastroPFDto);
 		
 		String cnpj = cadastroPFDto.getCnpj();
-		Empresa empresa = this.empresaService.findByCnpj(cnpj).orElseThrow(() -> new NotFoundException("Empresa não encontrada para o CNPJ: " +cnpj));
+		Empresa empresa = this.empresaService.findByCnpj(cnpj).orElseThrow(() -> new NotFoundException("Empresa nao encontrada para o CNPJ: " +cnpj));
 		
 		Funcionario funcionario = CadastroPFMapper.convertToEntity(cadastroPFDto);
 		funcionario.setEmpresa(empresa);
