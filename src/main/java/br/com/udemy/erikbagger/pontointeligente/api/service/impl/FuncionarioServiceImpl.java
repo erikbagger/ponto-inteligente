@@ -27,7 +27,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	public Optional<Funcionario> buscarPorId(Long id){
 		log.info("Recebendo um id para retornar um Funcionario: {}", id);
 		
-		Optional<Funcionario> funcionario = Optional.ofNullable(this.repository.findOne(id));
+		Optional<Funcionario> funcionario = this.repository.findById(id);
 		
 		log.info("Retornando um Funcionario: {}", funcionario);
 		return funcionario;
@@ -105,7 +105,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 			throw new BadRequestException("id.not.null", "Entidade com Id nulo");
 		}
 		
-		Funcionario funcionario = Optional.ofNullable(this.repository.findOne(entity.getId())).orElseThrow(() -> new NotFoundException("Erro ao atualizar. Registro não encontrado"));
+		Funcionario funcionario = this.repository.findById(entity.getId()).orElseThrow(() -> new NotFoundException("Erro ao atualizar. Registro não encontrado"));
 		
 		if(!funcionario.getEmail().equals(entity.getEmail())) {
 			Optional<Funcionario> email = this.findByEmail(entity.getEmail());
@@ -128,10 +128,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 		Funcionario funcionario = this.repository.findByCpf(cpf).orElseThrow(() -> new NotFoundException("Registro não encontrado"));
 
-		Long id = funcionario.getId();
-
-		this.repository.delete(id);
-		log.info("Objeto Funcionario removido com sucesso com o id: {}, e CPF: {}", id, cpf);
+		this.repository.delete(funcionario);
+		log.info("Objeto Funcionario removido com sucesso com o id: {}, e CPF: {}", funcionario.getId(), cpf);
 	}
 	
 	private void updateAttributes(Funcionario source, Funcionario target) {

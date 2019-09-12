@@ -34,7 +34,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 	public Optional<Lancamento> buscarPorId(Long id) {
 		log.info("Recebendo um id para retornar um Lancamento: {}", id);
 
-		Optional<Lancamento> lancamento = Optional.ofNullable(this.repository.findOne(id));
+		Optional<Lancamento> lancamento = this.repository.findById(id);
 
 		log.info("Retornando Lancamento: {}", lancamento);
 		return lancamento;
