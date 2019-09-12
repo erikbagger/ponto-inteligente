@@ -14,7 +14,7 @@ public class Lancamento implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LANCAMENTO_SEQ")
-	@SequenceGenerator(name = "LANCAMENTO_SEQ", sequenceName = "LANCAMENTO_SEQ", allocationSize = 1)
+	@SequenceGenerator(name = "LANCAMENTO_SEQ", sequenceName = "lancamento_id_seq", allocationSize = 1)
 	@Column(name = "ID")
 	private Long id;
 

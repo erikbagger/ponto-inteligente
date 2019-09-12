@@ -1,6 +1,6 @@
 package br.com.udemy.erikbagger.pontointeligente.api.persistence.util;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.UUID;
 
 public class PasswordUtils {
 	
@@ -8,6 +8,6 @@ public class PasswordUtils {
 		if (password == null) {
 			return password;
 		}
-		return new BCryptPasswordEncoder().encode(password);
+		return UUID.randomUUID().toString();
 	}
 }

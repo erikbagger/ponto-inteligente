@@ -16,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,7 +56,6 @@ public class LancamentoControllerImpl implements LancamentoController {
 		return ResponseEntity.ok().body(dtos);
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@Override
 	public ResponseEntity<String> excluir(@PathVariable("id") Long id) throws NotFoundException{
 		log.info("Recebendo um id para excluir um Lancamento: {}", id);

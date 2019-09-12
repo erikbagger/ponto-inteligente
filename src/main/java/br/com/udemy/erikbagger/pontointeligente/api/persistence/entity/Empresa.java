@@ -15,7 +15,7 @@ public class Empresa implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMPRESA_SEQ")
-	@SequenceGenerator(name = "EMPRESA_SEQ", sequenceName = "EMPRESA_SEQ", allocationSize = 1)
+	@SequenceGenerator(name = "EMPRESA_SEQ", sequenceName = "empresa_id_seq", allocationSize = 1)
 	@Column(name = "ID")
 	private Long id;
 
