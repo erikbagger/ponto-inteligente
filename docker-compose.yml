@@ -1,6 +1,27 @@
 version: "3"
+
+networks:
+  dev-network:
+    driver: bridge
+
 services:
-  web:
+  ponto-inteligente-api:
+    build:
+      context: .
+      dockerfile: /app.dockerfile
     image: lordbagger/ponto-inteligente-image
+    container_name: ponto-inteligente-api
     ports:
       - "8080:8080"
+    networks:
+      - dev-network
+    depends_on:
+      - "ponto-inteligente-db"
+  ponto-inteligente-db:
+    image: postgres
+    networks:
+      - dev-network
+    environment:
+      POSTGRES_PASSWORD: "5f06fd320f986c19cbc79b07fa4aef56"
+      POSTGRES_USER: "lordbagger"
+      POSTGRES_DB: "ponto-inteligente-db"
