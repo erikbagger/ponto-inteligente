@@ -8,8 +8,7 @@ services:
   ponto-inteligente-api:
     build:
       context: .
-      dockerfile: /app.dockerfile
-    image: lordbagger/ponto-inteligente-image
+      dockerfile: ./app.dockerfile
     container_name: ponto-inteligente-api
     ports:
       - "8080:8080"

@@ -1,6 +1,7 @@
 package br.com.udemy.erikbagger.pontointeligente.api.service.impl;
 
 import br.com.udemy.erikbagger.pontointeligente.api.exception.BadRequestException;
+import br.com.udemy.erikbagger.pontointeligente.api.exception.BusinessException;
 import br.com.udemy.erikbagger.pontointeligente.api.exception.NotFoundException;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.entity.Empresa;
 import br.com.udemy.erikbagger.pontointeligente.api.persistence.repository.EmpresaRepository;
@@ -41,7 +42,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 
 		if (empresa.isPresent()) {
 			log.error("Empresa já existente: {}", empresa);
-			throw new BadRequestException("Erro ao salvar", "Empresa já cadastrada");
+			throw new BusinessException("Erro ao salvar", "Empresa já cadastrada");
 		}
 
 		entity = this.repository.save(entity);
